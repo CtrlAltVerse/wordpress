@@ -54,7 +54,10 @@ final class Social_Share
          }
       }
 
-      add_action('wp_insert_post', [$this, 'on_post_save'], 10, 2);
+      if(!empty($this->active_networks)){
+         add_action('wp_insert_post', [$this, 'on_post_save'], 10, 2);
+      }
+
       add_action('template_redirect', [$this, 'retrieve_fb_code']);
       add_action('template_redirect', [$this, 'retrieve_threads_code']);
    }
@@ -66,6 +69,11 @@ final class Social_Share
       }
 
       if ('publish' !== $post->post_status) {
+         return;
+      }
+
+      // TOO OLD
+      if(DAY_IN_SECONDS <= time() - strtotime($post->post_date_gmt)){
          return;
       }
 

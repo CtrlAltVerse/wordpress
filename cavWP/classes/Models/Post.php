@@ -71,8 +71,6 @@ class Post
 
       if ($this->data) {
          $this->ID = (int) $this->data->ID;
-      } else {
-         return new WP_Error('post_not_found', 'Post not found');
       }
    }
 
@@ -126,6 +124,10 @@ class Post
     */
    public function get(string $key, string $size = 'post-thumbnail', array $attrs = [], string $taxonomy = 'category', string $format = '', bool $apply_filter = true, bool $with_html = false, bool $sanitize = true)
    {
+      if(empty($this->data)){
+         return;
+      }
+
       // $key ALIAS
       $key = match ($key) {
          'image_id', 'thumb_id', 'thumbnail_id' => '_thumbnail_id',
@@ -267,6 +269,10 @@ class Post
     */
    public function get_meta(string $key = '', bool $single = true)
    {
+      if(empty($this->data)){
+         return;
+      }
+
       return get_post_meta($this->ID, $key, $single);
    }
 
@@ -279,6 +285,10 @@ class Post
     */
    public function has_modified()
    {
+      if(empty($this->data)){
+         return;
+      }
+
       return $this->data->post_date !== $this->data->post_modified;
    }
 }

@@ -141,7 +141,9 @@ final class Admin_Page
       flush_rewrite_rules(false);
 
       if ($site_icon_ID = get_option('site_icon')) {
+         add_image_size('cav_favicon', 64, 64, true);
          Utils::regenerate_image_sizes($site_icon_ID, ['medium_large']);
+         remove_image_size('cav_favicon');
       }
    }
 

@@ -12,11 +12,11 @@
    'echo'       => 0,
 ])}
 <body class="text-zinc-100 text-lg overflow-x-hidden custom-background">
-   <div class="w-screen min-h-screen backdrop-blur-sm bg-black/75">
-      <div class="flex flex-col gap-8 justify-between max-w-md h-full pt-16 pb-6 px-4 mx-auto">
+   <div class="w-screen min-h-screen h-full backdrop-blur-sm bg-black/75">
+      <div class="flex flex-col gap-8 justify-between max-w-md min-h-screen pt-16 pb-6 px-4 mx-auto">
          <header class="flex flex-col gap-2 items-center">
-            <div class="rounded-full overflow-hidden">{$avatar|noescape}</div>
-            <h1 class="font-semibold text-2xl">{$name}</h1>
+            <div class="rounded-full overflow-hidden"><a href="{$site}">{$avatar|noescape}</a></div>
+            <h1 class="font-semibold text-2xl"><a href="{$site}">{$name}</a></h1>
             <a href="{$site}" class="text-base">{$domain}</a>
             <p>{$description}</p>
          </header>

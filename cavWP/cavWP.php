@@ -46,7 +46,6 @@ final class cavWP
    public function init_hook(): void
    {
       add_rewrite_tag('%cav%', '([a-z-]{12})');
-      add_image_size('cav_favicon', 64, 64, true);
    }
 
    public function load_classes(): void

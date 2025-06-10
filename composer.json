@@ -1,7 +1,6 @@
 {
    "scripts": {
-      "post-install-cmd": "cp -r vendor cavWP/vendor",
-      "indent": "sed -i \"s/$indent, \\['  '/$indent, \\['   '/\" vendor/friendsofphp/php-cs-fixer/src/WhitespacesFixerConfig.php",
+      "post-install-cmd": "sed -i \"s/$indent, \\['  '/$indent, \\['   '/\" vendor/friendsofphp/php-cs-fixer/src/WhitespacesFixerConfig.php",
       "fix": "vendor/bin/php-cs-fixer fix cavWP",
       "doc": "phpdoc run",
       "help": "phpdoc run --format=xml"
@@ -9,9 +8,6 @@
    "require-dev": {
       "friendsofphp/php-cs-fixer": "^3.75",
       "phpdocumentor/shim": "^3.7"
-   },
-   "require": {
-      "latte/latte": "^3.0"
    },
    "config": {
       "allow-plugins": {

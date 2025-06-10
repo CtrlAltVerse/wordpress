@@ -29,7 +29,10 @@ jobs:
 
       - name: Install prod dep
         run: |
+          cd cawWP
           composer install --no-dev
+          rm composer.json composer.lock
+          cd ..
 
       - name: Release WP directory
         uses: 10up/action-wordpress-plugin-deploy@v2
