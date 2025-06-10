@@ -1,0 +1,8 @@
+node_modules/
+env-*
+**/cache/
+uploads/
+vendor/
+.phpdoc/build
+.phpdoc/cache
+cavWP/assets/

@@ -1,0 +1,7 @@
+<div class="flex items-center gap-5 py-3 px-4">
+   <div class="flex flex-col gap-1 w-90 shrink-0">
+      <label class="text-lg font-medium" for="{$name}">{$label|noescape}</label>
+      <div class="mt-1 italic text-base" n:if=$description>{$description|noescape}</div>
+   </div>
+   <input id="{$name}" n:class="'color' === $type ? 'size-10' : '!text-lg regular-text'" name="{$name}" type="{$type}" value="{$current}" {$attrs|noescape} />
+</div>

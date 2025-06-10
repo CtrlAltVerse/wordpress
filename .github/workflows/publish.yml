@@ -1,0 +1,51 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.1.0
+      - name: Generate assets
+        run: |
+          npm i && npm run build
+
+      - name: Setup Composer
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3.11'
+          extensions: mbstring, xml, curl
+          tools: composer
+
+      - name: Install prod dep
+        run: |
+          composer install --no-dev
+
+      - name: Release WP directory
+        uses: 10up/action-wordpress-plugin-deploy@v2
+        with:
+          plugin-slug: cawWP
+          svn-username: ${{ secrets.SVN_USERNAME }}
+          svn-password: ${{ secrets.SVN_PASSWORD }}
+
+      - name: Send Email
+        uses: hilarion5/send-mail@v1
+        with:
+          smtp-server: ${{vars.SMTP_HOST}}
+          from-email: ${{vars.SMTP_USER}}
+          to-email: para@fagnerjb.com
+          username: ${{vars.SMTP_USER}}
+          password: ${{secrets.SMTP_PASS}}
+          subject: Deploy done
+          html: |
+            <p>Deploy done: ${{github.ref_name}} in ${{github.repository}}</p>

@@ -1,0 +1,9 @@
+<div class="flex items-center gap-5 py-3 px-4">
+   <div class="flex flex-col gap-1 w-90 shrink-0">
+      <label class="text-lg font-medium" for="{$name}">{$label|noescape}</label>
+      <div class="mt-1 italic text-base" n:if=$description>{$description|noescape}</div>
+   </div>
+   <div>
+      <input id="{$name}" class="!text-lg min-w-120" name="{$name}" type="{$type}" value="1" {checked(1, $current, true)|noescape} {$attrs|noescape} />
+   </div>
+</div>

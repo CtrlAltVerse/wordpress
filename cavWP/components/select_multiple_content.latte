@@ -1,0 +1,11 @@
+<div class="flex items-center gap-5 py-3 px-4">
+   <div class="flex flex-col gap-1 w-90 shrink-0">
+      <label class="text-lg font-medium" for="{$name}">{$label|noescape}</label>
+      <div class="mt-1 italic text-base" n:if=$description>{$description|noescape}</div>
+   </div>
+   <div>
+      <select id="{$name}" class="!text-lg" name="{$name}[]" {$attrs|noescape}>
+         <option n:foreach="$choices as $choice_value => $choice_label" value="{$choice_value}" {in_array($choice_value,$current) ? 'selected' : ''|noescape}>{$choice_label}</option>
+      </select>
+   </div>
+</div>

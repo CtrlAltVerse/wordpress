@@ -1,0 +1,31 @@
+.phpdocumentor .phpdocumentor-signature {
+    display: block;
+    font-size: var(--text-lg);
+    border: 1px solid #f0f0f0;
+}
+
+.phpdocumentor .phpdocumentor-signature.-deprecated .phpdocumentor-signature__name {
+    text-decoration: line-through;
+}
+
+.phpdocumentor-signature__response_colon,
+.phpdocumentor-signature__response_type,
+.phpdocumentor-signature__brackets,
+.phpdocumentor-signature__name{
+   color: #008a20;
+}
+
+.phpdocumentor-signature__argument__return-type{
+   color: #d63638
+}
+
+.phpdocumentor-signature__argument__name{
+   color: #135e96;
+}
+
+@media (min-width: {{ breakpoints['md'] }}) {
+    .phpdocumentor .phpdocumentor-signature {
+        margin-left: calc(var(--spacing-xl) * -1);
+        width: calc(100% + var(--spacing-xl));
+    }
+}

@@ -1,0 +1,10 @@
+@import 'tailwindcss' source(none);
+
+@source "../cavWP/components/links_page.latte";
+
+.menu-item-text {
+   @apply font-semibold;
+}
+.menu-item-description {
+   @apply block font-light text-base pt-2;
+}

@@ -1,0 +1,13 @@
+<div class="flex items-center gap-5 mt-6 py-3 px-4 bg-neutral-300">
+   <div class="grow flex flex-col gap-1">
+      <div class="text-sm uppercase font-medium" style="color: {$color|noescape}">{$category}</div>
+      <div class="text-xl font-semibold">{$title}</div>
+      <div class="text-base">{$description}</div>
+   </div>
+   <div class="flex items-center gap-4 px-3 pb-3">
+      <label n:if=$active class="relative w-20 h-11 rounded-full bg-neutral-200 cursor-pointer">
+         <input class="section-toggle sr-only peer" type="checkbox" name="{$name}" value="1" {checked('1', $value, true)|noescape} />
+         <div class="absolute top-1 left-1 rounded-full size-9 transition-all peer-not-checked:!bg-zinc-400 peer-checked:left-10" style="background: {$color|noescape}"></div>
+      </label>
+   </div>
+</div>

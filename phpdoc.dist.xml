@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdocumentor
+   configVersion="3"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns="https://www.phpdoc.org"
+   xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/phpDocumentor/phpDocumentor/master/data/xsd/phpdoc.xsd"
+>
+   <title>CAV WP Plugin</title>
+    <version number="3.0.0">
+        <api>
+            <source dsn=".">
+                <path>cavWP</path>
+            </source>
+            <ignore hidden="true" symlinks="true">
+               <path>cavWP/assets/**/*</path>
+               <path>cavWP/components/**/*</path>
+               <path>cavWP/vendor/**/*</path>
+            </ignore>
+            <default-package-name>Plugin</default-package-name>
+            <include-source>false</include-source>
+        </api>
+    </version>
+   <template name="default"/>
+   <setting name="template.color" value="indigo"/>
+</phpdocumentor>

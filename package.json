@@ -1,0 +1,23 @@
+{
+   "name": "cav-wp-assets-manager",
+   "version": "1.0.0",
+   "description": "Handles assets for the CAV WordPress Plugin.",
+   "main": "index.ts",
+   "author": "CtrlAltVerso",
+   "license": "Apache-2.0",
+   "scripts": {
+      "build": "node ./scripts/updateAssets.js && npm run admin -- --minify && npm run links -- --minify",
+      "dev": "nodemon & npm run admin -- --watch & npm run links -- --watch",
+      "admin": "npx @tailwindcss/cli -i ./assets_dev/admin.css -o ./cavWP/assets/config_page.css",
+      "links": "npx @tailwindcss/cli -i ./assets_dev/links.css -o ./cavWP/assets/links_page.css",
+      "js": "webpack"
+   },
+   "devDependencies": {
+      "@tailwindcss/cli": "^4.1.7",
+      "nodemon": "^3.1.10",
+      "tailwindcss": "^4.1.7",
+      "ts-loader": "^9.5.2",
+      "webpack": "^5.99.9",
+      "webpack-cli": "^6.0.1"
+   }
+}

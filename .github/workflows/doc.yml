@@ -1,0 +1,51 @@
+name: Update documentation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install dev dep
+        run: |
+          composer install --dev
+
+      - name: Generate documentation
+        run: |
+          composer run doc
+
+      - name: Setup Rclone
+        run: |
+          curl -o rclone.zip https://downloads.rclone.org/rclone-current-linux-amd64.zip
+          unzip rclone.zip
+          cd rclone-*-linux-amd64
+          mkdir -p ~/.local/bin
+          cp rclone ~/.local/bin/
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Publish documentation
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.private_key
+          chmod 600 ~/.private_key
+          rclone config create remote sftp host=${{ secrets.FTP_HOST }} user=${{ vars.SERVER_USER }} key_file=~/.private_key -vv
+          rclone sync .phpdoc/build/ remote:${{ vars.SERVER_FOLDER }} -vv
+
+      - name: Send Email
+        uses: hilarion5/send-mail@v1
+        with:
+          smtp-server: ${{vars.SMTP_HOST}}
+          from-email: ${{vars.SMTP_USER}}
+          to-email: para@fagnerjb.com
+          username: ${{vars.SMTP_USER}}
+          password: ${{secrets.SMTP_PASS}}
+          subject: Deploy done
+          html: |
+            <p>Deploy done: ${{github.ref_name}} in ${{github.repository}}</p>

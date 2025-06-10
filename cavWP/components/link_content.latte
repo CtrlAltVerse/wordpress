@@ -1,0 +1,11 @@
+<div class="flex items-center gap-5 py-3 px-4">
+   <div class="flex flex-col gap-1 w-90 shrink-0">
+      <label class="text-lg font-medium">{$label|noescape}</label>
+      <div class="mt-1 italic text-base" n:if=$description>{$description|noescape}</div>
+   </div>
+   <div>
+      <a class="py-2 px-5 rounded-sm !font-medium !text-lg min-w-120 bg-blue-200" href="{$default}" {$attrs|noescape}>
+         {$label|noescape}
+      </a>
+   </div>
+</div>
