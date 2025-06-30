@@ -2,6 +2,9 @@
 
 namespace cavWP;
 
+use DateTimeImmutable;
+use DateTimeZone;
+
 /**
  * Collection of utility methods for WordPress development.
  *
@@ -51,32 +54,30 @@ final class Utils
       return $mid_size;
    }
 
-/**
- * Remove the protocol from an URL.
- *
- * @param  string $url
- *
- * @return string URL without protocol.
- * @since 1.0.0
- */
+   public static function changes_timezone($datetime, $format = 'Y-m-d H:i:s')
+   {
+      $date = new DateTimeImmutable($datetime, new DateTimeZone('UTC'));
+
+      $date->setTimezone(wp_timezone());
+
+      return $date->format($format);
+   }
+
+   /**
+    * Remove the protocol from an URL.
+    *
+     * @param string $url
+    *
+     * @return string URL without protocol.
+    *
+    * @since 1.0.0
+    */
    public static function clean_domain($url)
    {
       $domain = preg_replace('|https?://|', '', $url);
 
       return untrailingslashit($domain);
    }
-
-   /**
-    * Get the current page, skipping 0.
-    *
-    * @return int the current page.
-    * @since 1.0.0
-    */
-      public static function get_page()
-   {
-      return max(get_query_var('paged'), 1);
-   }
-
 
    /**
     * Cleans a string to be use as hashtag.
@@ -243,6 +244,18 @@ final class Utils
    }
 
    /**
+    * Get the current page, skipping 0.
+    *
+     * @return int the current page.
+    *
+    * @since 1.0.0
+    */
+   public static function get_page()
+   {
+      return max(get_query_var('paged'), 1);
+   }
+
+   /**
     * Retrieves all years in which posts of a given post type were published.
     *
     * Queries the database to find distinct years based on the post date.
@@ -361,6 +374,24 @@ final class Utils
    public static function path_resolve(array $paths)
    {
       return implode(DIRECTORY_SEPARATOR, $paths);
+   }
+
+   /**
+    * Clean cache from a URL.
+    *
+     * @param string $page
+    *
+     * @return void
+    *
+    * @since 1.0.0
+    */
+   public static function purge_page_cache(string $page): void
+   {
+      global $nginx_purger;
+
+      if (isset($nginx_purger)) {
+         $nginx_purger->purge_url(home_url($page));
+      }
    }
 
    /**

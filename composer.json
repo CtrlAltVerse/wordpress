@@ -1,12 +1,9 @@
 {
    "scripts": {
-      "post-install-cmd": "sed -i \"s/$indent, \\['  '/$indent, \\['   '/\" vendor/friendsofphp/php-cs-fixer/src/WhitespacesFixerConfig.php",
-      "fix": "vendor/bin/php-cs-fixer fix cavWP",
       "doc": "phpdoc run",
       "help": "phpdoc run --format=xml"
    },
    "require-dev": {
-      "friendsofphp/php-cs-fixer": "^3.75",
       "phpdocumentor/shim": "^3.7"
    },
    "config": {

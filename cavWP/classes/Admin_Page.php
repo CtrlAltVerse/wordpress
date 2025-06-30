@@ -9,9 +9,9 @@ final class Admin_Page
 {
    public function __construct()
    {
-      add_action('admin_menu', [$this, 'admin_page_options']);
+      add_action('admin_init', [$this, 'register_sections']);
+      add_action('admin_menu', [$this, 'register_page']);
       add_action('admin_enqueue_scripts', [$this, 'enqueues_assets']);
-      add_action('admin_init', [$this, 'register_page']);
       add_action('admin_footer', [$this, 'on_save_settings']);
 
       $plugin_base = plugin_basename(CAV_WP_DIR);
@@ -62,28 +62,15 @@ final class Admin_Page
       return $actions;
    }
 
-   public function admin_page_options(): void
-   {
-      $name = get_plugin_data(CAV_WP_FILE)['Name'];
-
-      add_options_page(
-         $name,
-         $name,
-         'manage_options',
-         'cavwp',
-         [$this, 'page_content'],
-         99,
-      );
-   }
-
    public function enqueues_assets(): void
    {
       global $pagenow;
 
-      if ('options-general.php' !== $pagenow || 'cavwp' !== ($_GET['page'] ?? '')) {
+      if ('options-general.php' !== $pagenow || !in_array($_GET['page'] ?? '', ['cavwp', 'cavwp-seo_links'])) {
          return;
       }
 
+      add_thickbox();
       $assets_dir = plugin_dir_url(CAV_WP_FILE) . 'assets/';
 
       wp_enqueue_style('cavwp', $assets_dir . 'config_page.css');
@@ -187,6 +174,20 @@ final class Admin_Page
    }
 
    public function register_page(): void
+   {
+      $name = get_plugin_data(CAV_WP_FILE)['Name'];
+
+      add_options_page(
+         $name,
+         $name,
+         'manage_options',
+         'cavwp',
+         [$this, 'page_content'],
+         99,
+      );
+   }
+
+   public function register_sections(): void
    {
       $options = Plugin_Options::get_options();
 

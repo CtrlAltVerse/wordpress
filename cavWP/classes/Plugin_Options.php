@@ -181,22 +181,26 @@ final class Plugin_Options
                ],
             ],
          ],
-         // 'minify' => [
-         //    'title'        => 'Minify HTML',
-         //    'description'  => '',
-         //    'active'       => true,
-         //    'category'     => 'performance',
-         //    'fields'       => [
-         //       'js_on' => [
-         //          'label' => esc_html__('Minify JS inline', 'cavwp'),
-         //          'type'  => 'checkbox',
-         //       ],
-         //       'css_on' => [
-         //          'label' => esc_html__('Minify CSS inline', 'cavwp'),
-         //          'type'  => 'checkbox',
-         //       ],
-         //    ],
-         // ],
+         'minify' => [
+            'title'       => 'Minify HTML',
+            'description' => '',
+            'active'      => true,
+            'category'    => 'performance',
+            'fields'      => [
+               'inline_js' => [
+                  'label' => esc_html__('Minify JS inline', 'cavwp'),
+                  'type'  => 'checkbox',
+               ],
+               'inline_css' => [
+                  'label' => esc_html__('Minify CSS inline', 'cavwp'),
+                  'type'  => 'checkbox',
+               ],
+               'remove_comments' => [
+                  'label' => esc_html__('Remove comments', 'cavwp'),
+                  'type'  => 'checkbox',
+               ],
+            ],
+         ],
          'opensearch' => [
             'title'       => 'OpenSearch',
             'description' => esc_html__('Creates opensearch.osdx file', 'cavwp'),
@@ -223,11 +227,15 @@ final class Plugin_Options
             ],
          ],
          'caches' => [
-            'title'       => 'Cache',
+            'title'       => 'Cache & Performance',
             'description' => '',
             'active'      => false,
             'category'    => 'performance',
             'fields'      => [
+               'defer_css' => [
+                  'label' => esc_html__('Asynchronously loads external CSS files on mobile devices.', 'cavwp'),
+                  'type'  => 'checkbox',
+               ],
                'get_requests' => [
                   'label' => esc_html__('Cache GET requests', 'cavwp'),
                   'type'  => 'checkbox',
@@ -347,7 +355,96 @@ final class Plugin_Options
                ],
             ],
          ],
+         'cdn' => [
+            'title'       => 'Simple CDN',
+            'description' => 'Swap domain of images, video, audios and another assets',
+            'active'      => true,
+            'category'    => 'performance',
+            'fields'      => [
+               'host' => [
+                  'label'       => 'Target domain',
+                  'description' => 'Only domain, without protocol.',
+                  'attrs'       => [
+                     'placeholder' => 'example.com',
+                  ],
+               ],
+               'types' => [
+                  'label'       => 'File extensions',
+                  'description' => 'Separated by space, without dots.',
+                  'type'        => 'textarea',
+                  'attrs'       => [
+                     'placeholder' => 'jpg png gif',
+                  ],
+               ],
+            ],
+         ],
+         'health_check' => [
+            'title'       => 'Health Check',
+            'description' => 'Creates a new API endpoint that checks current state of the site. The response may takes 35s.',
+            'active'      => true,
+            'category'    => 'dashboard',
+            'fields'      => [
+               'theme' => [
+                  'label'   => 'Theme to be active',
+                  'type'    => 'select',
+                  'choices' => ['' => '(none)', ...array_map(fn($theme) => $theme->name, wp_get_themes())],
+               ],
+               'custom_url' => [
+                  'label'       => 'URL',
+                  'description' => 'Self URL to check if it is accessible and not empty.',
+                  'type'        => 'url',
+                  'attrs'       => [
+                     'placeholder' => home_url('*'),
+                  ],
+               ],
+            ],
+         ],
+         'activity_log' => [
+            'title'       => 'Activity Log',
+            'description' => '',
+            'active'      => true,
+            'category'    => 'dashboard',
+            'fields'      => [
+               'block_fail_logins' => [
+                  'label' => 'Blocks multiple fail login attempts',
+                  'type'  => 'checkbox',
+               ],
+               'block_fail_logins_interval' => [
+                  'label'       => 'Failed Login Interval',
+                  'description' => 'Time frame in minutes to check failed logins attempts for the same IP.',
+                  'type'        => 'number',
+                  'default'     => 15,
+               ],
+               'block_fail_logins_attempts' => [
+                  'label'       => 'Failed Attempts Limit',
+                  'description' => 'Number of failed login attempts allowed during the interval.',
+                  'type'        => 'number',
+                  'default'     => 5,
+               ],
+            ],
+         ],
+         'seo_links' => [
+            'title'       => 'PageSpeed Scores',
+            'description' => __('Regularly test templates with PageSpeed.', 'cavwp'),
+            'active'      => true,
+            'category'    => 'performance',
+            'fields'      => [
+               'pagespeed_apikey' => [
+                  'label' => __('PageSpeed API Key', 'cavwp'),
+                  'type'  => 'password',
+               ],
+               'custom_urls' => [
+                  'label'       => __('Custom URLs to check', 'cavwp'),
+                  'type'        => 'textarea',
+                  'description' => __('Add one full URL from this domain per line.', 'cavwp'),
+                  'attrs'       => [
+                     'rows' => '5',
+                  ],
+               ],
+            ],
+         ],
 
+         /*
          '' => [
             'title'       => '',
             'description' => '',
@@ -360,6 +457,7 @@ final class Plugin_Options
                ],
             ],
          ],
+         */
       ];
 
       $content_types = Utils::get_content_types();
@@ -382,6 +480,7 @@ final class Plugin_Options
       $all_options    = array_merge($custom_options, $options);
 
       ksort($all_options);
+      uasort($all_options, ['cavWP\Sorters', 'cat_col']);
 
       return $all_options;
    }
@@ -390,7 +489,7 @@ final class Plugin_Options
    {
       $menus = wp_get_nav_menus();
 
-      $return = [];
+      $return[0] = '(none)';
 
       foreach ($menus as $menu) {
          $return[$menu->term_id] = $menu->name;

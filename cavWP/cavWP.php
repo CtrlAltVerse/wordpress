@@ -26,6 +26,10 @@ define('CAV_WP_DIR', plugin_dir_path(CAV_WP_FILE));
  */
 define('CAV_WP_URL', plugin_dir_url(CAV_WP_FILE));
 
+if (!defined('CURRENT_IP')) {
+   define('CURRENT_IP', $_SERVER['HTTP_CLIENT_IP'] ?? $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR']);
+}
+
 require 'functions.php';
 
 $AutoLoader = \cav_autoloader();
@@ -39,6 +43,7 @@ final class cavWP
    public function __construct()
    {
       add_action('init', [$this, 'init_hook'], 9);
+      add_action('wp', [$this, 'load_parse_content']);
 
       $this->load_classes();
    }
@@ -55,6 +60,15 @@ final class cavWP
       new Reorder_Head_Hooks();
       new Misc();
       new Menu();
+
+      if (get_option('cav-seo_links')) {
+         new SEO_Links\Register();
+         new SEO_Links\Admin_Page();
+      }
+
+      if (get_option('cav-health_check')) {
+         new Health_Check();
+      }
 
       if (get_option('cav-metatags')) {
          new Metatags();
@@ -76,7 +90,7 @@ final class cavWP
          new Social_Share();
       }
 
-      if (get_option('cav-links')) {
+      if (get_option('cav-links') && is_numeric(get_option('cav-links-menu'))) {
          new LinksPage();
       }
 
@@ -84,6 +98,15 @@ final class cavWP
 
       if (!empty($ads_txt)) {
          new Ads_txt($ads_txt);
+      }
+   }
+
+   public function load_parse_content(): void
+   {
+      $cav_template = get_query_var('cav', false);
+
+      if (!is_admin() && !is_login() && !is_robots() && !is_feed() || in_array($cav_template, ['links'])) {
+         new Parse_HTML();
       }
    }
 }

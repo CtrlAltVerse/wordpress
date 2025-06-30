@@ -108,12 +108,12 @@ final class Metatags
 
          if (is_array($content)) {
             foreach ($content as $value) {
-               echo "<meta {$type}=\"{$key}\" content=\"{$value}\">";
+               echo "<meta {$type}=\"{$key}\" content=\"{$value}\" />";
             }
             continue;
          }
 
-         echo "<meta {$type}=\"{$key}\" content=\"{$content}\">";
+         echo "<meta {$type}=\"{$key}\" content=\"{$content}\" />";
       }
    }
 
@@ -174,7 +174,12 @@ final class Metatags
       $metas['og:site_name'] = get_bloginfo('name');
       $metas['og:type']      = 'website';
 
-      // <meta name="msapplication-TileImage" content="icon-tile.png">
+      if ($site_icon_ID = get_option('site_icon')) {
+         $metas['msapplication-TileImage'] = [
+            'type'    => 'name',
+            'content' => wp_get_attachment_image_url($site_icon_ID, 'full'),
+         ];
+      }
 
       if ($fb_app_id = get_option('cav-metatags-fb_app_id')) {
          $metas['fb:app_id'] = $fb_app_id;

@@ -338,7 +338,7 @@ if (!function_exists('is_bot')) {
    function is_bot(string $user_agent = '')
    {
       if (empty($user_agent)) {
-         $user_agent = $_SERVER['HTTP_USER_AGENT'];
+         $user_agent = $_SERVER['HTTP_USER_AGENT'] ?? '';
       }
 
       if (empty($user_agent)) {
@@ -357,11 +357,15 @@ if (!function_exists('is_bot')) {
          'attentio',
          'baiduspider',
          'bingbot',
+         'BLEXBot',
          'chtml generic',
          'cloudflare-alwaysonline',
          'crawler',
          'Discordbot',
          'domaintunocrawler',
+         'DotBot',
+         'DuckDuckBot',
+         'Exabot',
          'facebot',
          'fastmobilecrawl',
          'feedfetcher-google',
@@ -369,7 +373,6 @@ if (!function_exists('is_bot')) {
          'froogle',
          'germcrawler',
          'gigabot',
-         'googlebot-mobile',
          'googlebot',
          'grapeshotcrawler',
          'grokkit-crawler',
@@ -378,6 +381,7 @@ if (!function_exists('is_bot')) {
          'ia_archiver',
          'iescholar',
          'infoseek',
+         'insomnia',
          'irlbot',
          'jumpbot',
          'kraken',
@@ -387,6 +391,7 @@ if (!function_exists('is_bot')) {
          'lycos',
          'mediapartners',
          'mediobot',
+         'MJ12bot',
          'motionbot',
          'mshots',
          'msnbot',
@@ -397,9 +402,17 @@ if (!function_exists('is_bot')) {
          'python-requests',
          'pythumbnail',
          'queryseekerspider',
+         'rogerbot',
          'scooter',
+         'Screaming Frog',
+         'SeekportBot',
+         'SemrushBot',
+         'SEOkicks',
+         'SeznamBot',
+         'SiteCheckerBot',
          'slurp',
          'snapbot',
+         'Sogou web spider',
          'spider',
          'taptubot',
          'technoratisnoop',
@@ -407,7 +420,9 @@ if (!function_exists('is_bot')) {
          'tweetmemebot',
          'twiceler',
          'twitterbot',
+         'UptimeRobot',
          'WhatsApp',
+         'Wotbox',
          'yahooseeker',
          'yahooysmcm',
          'yammybot',
@@ -468,5 +483,51 @@ if (!function_exists('_cav_prints_meta_charset')) {
       echo '<meta charset="' . get_bloginfo('charset') . '" />';
       echo '<meta http-equiv="X-UA-Compatible" content="IE=edge" />';
       echo '<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />';
+   }
+}
+
+if (
+   !function_exists('edit_user_link')) {
+   function edit_user_link(
+      ?string $text = null,
+      string $before = '',
+      string $after = '',
+      null|int|\WP_User $user = null,
+      string $css_class = 'user-edit-link',
+   ): void {
+      if (is_null($user)) {
+         $user = wp_get_current_user();
+      }
+
+      if (!is_a($user, 'WP_User')) {
+         $user = new \WP_User($user);
+      }
+
+      if (empty(!$user)) {
+         return;
+      }
+
+      $url = get_edit_user_link($user->ID);
+
+      if (!$url) {
+         return;
+      }
+
+      if (null === $text) {
+         $text = __('Edit This');
+      }
+
+      $link = '<a class="' . esc_attr($css_class) . '" href="' . esc_url($url) . '">' . $text . '</a>';
+
+      /**
+       * Filters the user edit link anchor tag.
+       *
+       * @since 1.0.0
+       *
+       * @param string $link    Anchor tag for the edit link.
+       * @param int    $user_id User ID.
+       * @param string $text    Anchor text.
+       */
+      echo $before . apply_filters('edit_user_link', $link, $user->ID, $text) . $after;
    }
 }

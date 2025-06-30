@@ -2,6 +2,7 @@
 
 namespace cavWP;
 
+use WP_Error;
 use WP_User;
 
 /**
@@ -33,60 +34,69 @@ final class Misc
 
    public function __construct()
    {
+      \add_action('admin_init', [$this, 'adds_nav_menu_item_post_type']);
+      \add_filter('authenticate', [$this, 'sets_generic_login_error'], 21);
+      \add_filter('nav_menu_items_nav_menu_item_recent', [$this, 'filters_nav_menu_items']);
+      \add_filter('nav_menu_items_nav_menu_item', [$this, 'filters_nav_menu_items']);
+
       $this->custom_robots_txt = get_option('cav-sitemaps-adds_robots_txt');
 
       if (!empty($this->custom_robots_txt)) {
-         add_filter('robots_txt', [$this, 'add_custom_robots'], 15);
+         \add_filter('robots_txt', [$this, 'add_custom_robots'], 15);
       }
 
       if (get_option('cav-dashboard-show_image_sizes')) {
-         add_filter('image_size_names_choose', [$this, 'show_images_all_sizes']);
+         \add_filter('image_size_names_choose', [$this, 'show_images_all_sizes']);
       }
 
       if (get_option('cav-theme-pages_template')) {
          foreach ($this->page_templates as $template) {
-            add_filter("{$template}_template_hierarchy", [$this, 'add_pages_folder']);
+            \add_filter("{$template}_template_hierarchy", [$this, 'add_pages_folder']);
          }
       }
 
-      if (get_option('cav-theme-add_supports')) {
-         add_action('after_setup_theme', [$this, 'add_supports']);
+      if (\get_option('cav-theme-add_supports')) {
+         \add_action('after_setup_theme', [$this, 'add_supports']);
       }
 
       if (get_option('cav-theme-title_tag')) {
-         add_action('after_setup_theme', [$this, 'add_title_tag']);
+         \add_action('after_setup_theme', [$this, 'add_title_tag']);
       }
 
-      if (get_option('cav-caches-css_ver_timestamp')) {
-         add_filter('style_loader_src', [$this, 'set_assets_version']);
+      if (\get_option('cav-caches-css_ver_timestamp')) {
+         \add_filter('style_loader_src', [$this, 'set_assets_version']);
       }
 
       if (get_option('cav-caches-js_ver_timestamp')) {
          add_filter('script_loader_src', [$this, 'set_assets_version']);
       }
 
-      if (get_option('cav-dashboard-hide_bar')) {
-         add_action('after_setup_theme', [$this, 'hide_admin_bar']);
+      if (\get_option('cav-dashboard-hide_bar')) {
+         \add_action('after_setup_theme', [$this, 'hide_admin_bar']);
       }
 
-      if (get_option('cav-theme-remove_tags')) {
-         add_action('after_setup_theme', [$this, 'remove_hooks']);
+      if (\get_option('cav-theme-remove_tags')) {
+         \add_action('after_setup_theme', [$this, 'remove_hooks']);
       }
 
-      if (get_option('cav-dashboard-acf_show_key')) {
-         add_action('acf/get_field_label', [$this, 'show_acf_field_key'], 5, 2);
+      if (\get_option('cav-dashboard-acf_show_key')) {
+         \add_action('acf/get_field_label', [$this, 'show_acf_field_key'], 5, 2);
       }
 
-      if (get_option('cav-dashboard-change_schema_colors') && 'production' !== wp_get_environment_type()) {
-         add_filter('get_user_option_admin_color', [$this, 'change_admin_scheme']);
+      if (\get_option('cav-dashboard-change_schema_colors') && 'production' !== wp_get_environment_type()) {
+         \add_filter('get_user_option_admin_color', [$this, 'change_admin_scheme']);
       }
 
-      if (get_option('cav-dashboard-new_user_mail')) {
-         add_filter('wp_new_user_notification_email_admin', [$this, 'change_new_user_mail'], 10, 2);
+      if (\get_option('cav-dashboard-new_user_mail')) {
+         \add_filter('wp_new_user_notification_email_admin', [$this, 'change_new_user_mail'], 10, 2);
       }
 
-      if (get_option('cav-smtp')) {
-         add_action('phpmailer_init', [$this, 'sets_mailer_config']);
+      if (\get_option('cav-smtp')) {
+         \add_action('phpmailer_init', [$this, 'sets_mailer_config']);
+      }
+
+      if (\get_option('cav-caches-defer_css') && wp_is_mobile()) {
+         \add_filter('style_loader_tag', [$this, 'adds_style_async'], 10, 4);
       }
    }
 
@@ -135,6 +145,18 @@ final class Misc
       add_theme_support('title-tag');
    }
 
+   public function adds_nav_menu_item_post_type(): void
+   {
+      global $wp_post_types;
+
+      $wp_post_types['nav_menu_item']->show_in_nav_menus = true;
+   }
+
+   public function adds_style_async($tag, $handle, $_href = '', $media = 'all')
+   {
+      return str_replace(["media='{$media}'", 'media="' . $media . '"'], 'media="print" onload="document.getElementById(\'' . $handle . '-css\').media=\'' . $media . '\'"', $tag);
+   }
+
    public function change_admin_scheme($color_scheme)
    {
       global $pagenow;
@@ -180,6 +202,11 @@ final class Misc
       $email['message'] .= "\n" . implode("\n\n", $output);
 
       return $email;
+   }
+
+   public function filters_nav_menu_items($posts)
+   {
+      return array_filter($posts, fn($post) => 'custom' === get_post_meta($post->ID, '_menu_item_object', true));
    }
 
    public function hide_admin_bar(): void
@@ -315,6 +342,22 @@ final class Misc
       }
 
       return add_query_arg('ver', $ver, $url);
+   }
+
+   public function sets_generic_login_error($maybe_error)
+   {
+      if (!is_wp_error($maybe_error)) {
+         return $maybe_error;
+      }
+
+      if (in_array($maybe_error->get_error_code(), ['invalid_email', 'invalid_username', 'incorrect_password', 'invalidcombo'])) {
+         return new WP_Error(
+            'authentication_failed',
+            __('<strong>Error:</strong> Invalid username, email address or incorrect password.'),
+         );
+      }
+
+      return $maybe_error;
    }
 
    public function sets_mailer_config($mailer): void

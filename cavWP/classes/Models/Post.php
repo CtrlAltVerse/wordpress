@@ -110,7 +110,7 @@ class Post
     * If a post_meta key is the same of one those, use Post->get_meta().
     *
      * @param string $key          The propriety or meta to retrieve
-     * @param string $size         Size of the thumbnail. Default: 'post-thumbnail'.
+     * @param string $size         Size of the thumbnail. Default: 'thumbnail'.
      * @param array  $attrs        Attributes for the thumbnail. Default: [].
      * @param string $taxonomy     Define taxonomy. Default: 'category'.
      * @param string $format       Date format. If empty, gets from configuration site. Default: ''.
@@ -122,7 +122,7 @@ class Post
     *
     * @since 1.0.0
     */
-   public function get(string $key, string $size = 'post-thumbnail', array $attrs = [], string $taxonomy = 'category', string $format = '', bool $apply_filter = true, bool $with_html = false, bool $sanitize = true)
+   public function get(string $key, string $size = 'thumbnail', array $attrs = [], string $taxonomy = 'category', string $format = '', bool $apply_filter = true, bool $with_html = false, bool $sanitize = true)
    {
       if(empty($this->data)){
          return;
