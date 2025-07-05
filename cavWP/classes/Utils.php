@@ -467,6 +467,39 @@ final class Utils
    }
 
    /**
+    * Render or return the content of a SVG.
+    *
+     * @param string $file  Path to the SVG.
+     * @param mixed  $class
+     * @param bool   $echo
+    *
+     * @return void
+    *
+    * @since 1.0.0
+    */
+   public static function render_svg($file, $class = '', $echo = true)
+   {
+      if (!file_exists($file)) {
+         return;
+      }
+
+      $content = file_get_contents($file);
+
+      if (!empty($class)) {
+         if (str_contains($content, 'class="')) {
+            $content = str_replace('class="', 'class="' . $class, $content);
+         } else {
+            $content = str_replace('<svg ', '<svg class="' . $class . '" ', $content);
+         }
+      }
+
+      if (!$echo) {
+         return $content;
+      }
+      echo $content;
+   }
+
+   /**
     * Registers a scheduled event to run only once. The key is based in the hook name and serialized arguments.
     *
      * @param int    $timestamp unix timestamp (UTC) for when to run the event.

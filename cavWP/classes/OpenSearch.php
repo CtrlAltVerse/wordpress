@@ -59,11 +59,11 @@ final class OpenSearch
 
    private function get_content()
    {
-      $index = new SimpleXMLElement(<<<'EOD'
+      $index = new SimpleXMLElement(<<<'XML'
          <OpenSearchDescription
          xmlns="http://a9.com/-/spec/opensearch/1.1/"
          xmlns:moz="http://www.mozilla.org/2006/browser/search/" />
-      EOD);
+      XML);
 
       $index->addChild('ShortName', get_bloginfo('name'));
 

@@ -14,41 +14,19 @@ final class Menu
       add_filter('nav_menu_link_attributes', [$this, 'adds_menu_link_classes'], 10, 3);
    }
 
-   public  function adds_menu_item_classes($classes, $_menu_item, $args)
-   {
-      if(empty($args->item_class)){
-         return $classes;
-      }
-
-      $classes[] = $args->item_class;
-
-      return $classes;
-   }
-
-   public function adds_menu_link_classes($atts, $_menu_item, $args)
-   {
-      if(empty($args->link_class)){
-         return $atts;
-      }
-
-      $atts['class'] = $args->link_class;
-
-      return $atts;
-   }
-
    public function add_menu_custom_field($item_id): void
    {
       $icon = get_post_meta($item_id, 'menu_icon', true);
       $icon = $icon ?: '';
 
-      echo <<<OPTIONS
+      echo <<<HTML
             <p class="description description-wide">
                <label for="edit-menu-item-icon-{$item_id}">
                   Classe do ícone<br>
                   <input type="text" id="edit-menu-item-icon-{$item_id}" class="widefat edit-menu-item-icon" name="menu-item-icon[{$item_id}]" value="{$icon}">
                </label>
             </p>
-      OPTIONS;
+      HTML;
    }
 
    public function add_menu_icon($title, $item)
@@ -60,6 +38,28 @@ final class Menu
       }
 
       return $title;
+   }
+
+   public function adds_menu_item_classes($classes, $_menu_item, $args)
+   {
+      if (empty($args->item_class)) {
+         return $classes;
+      }
+
+      $classes[] = $args->item_class;
+
+      return $classes;
+   }
+
+   public function adds_menu_link_classes($atts, $_menu_item, $args)
+   {
+      if (empty($args->link_class)) {
+         return $atts;
+      }
+
+      $atts['class'] = $args->link_class;
+
+      return $atts;
    }
 
    public function save_nav_menu(): void

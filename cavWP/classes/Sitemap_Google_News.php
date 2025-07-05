@@ -33,10 +33,10 @@ final class Sitemap_Google_News
 
    public function get_sitemap()
    {
-      $index = new SimpleXMLElement(<<<'EOD'
+      $index = new SimpleXMLElement(<<<'XML'
       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
           xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" />
-      EOD);
+      XML);
 
       $news_posts = get_posts([
          'post_type'      => ['post'],

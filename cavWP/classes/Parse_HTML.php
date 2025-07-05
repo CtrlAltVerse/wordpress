@@ -60,12 +60,11 @@ final class Parse_HTML
    private $compress_html;
    private $compress_inline_script;
    private $compress_inline_style;
+   private $html = '';
    private $remove_comments;
 
-   public function __construct()
+   public function __construct($html = null)
    {
-      ob_start([$this, 'close_ob']);
-
       $this->compress_html          = get_option('cav-minify');
       $this->compress_inline_script = get_option('cav-minify-inline_js');
       $this->compress_inline_style  = get_option('cav-minify-inline_css');
@@ -74,6 +73,12 @@ final class Parse_HTML
       $this->cdn_on         = get_option('cav-cdn');
       $this->cdn_domain     = get_option('cav-cdn-host');
       $this->cdn_extensions = get_option('cav-cdn-types');
+
+      if (is_null($html)) {
+         ob_start([$this, 'close_ob']);
+      } else {
+         $this->html = $this->close_ob($html);
+      }
    }
 
    public function close_ob($html)
@@ -91,6 +96,11 @@ final class Parse_HTML
       }
 
       return $html;
+   }
+
+   public function get_html()
+   {
+      return $this->html;
    }
 
    private function checks_tag($token)
@@ -188,7 +198,7 @@ final class Parse_HTML
          return $content;
       }
 
-      return $this->remove_whitespace($content, true);
+      return $this->remove_whitespace($content, 'script');
    }
 
    private function parse_style($style)
@@ -201,7 +211,7 @@ final class Parse_HTML
          $style = preg_replace('/\/\*!.*?\*\//', '', $style);
       }
 
-      return $this->remove_whitespace($style);
+      return $this->remove_whitespace($style, 'script');
    }
 
    private function parse_tag($token, $current_tag)
@@ -215,7 +225,7 @@ final class Parse_HTML
          $boolean_attrs = implode('|', array_map(fn($attr) => '\b' . $attr, $this->_boolean_attrs));
          $content       = preg_replace('/(\s+)(\w++' . $boolean_attrs . ')=[\w\'\"]*/', '$1$2', $content);
 
-         return $this->remove_whitespace($content);
+         return $this->remove_whitespace($content, $token['tag']);
       }
 
       return $token[0];
@@ -234,13 +244,12 @@ final class Parse_HTML
       return $file_url;
    }
 
-   private function remove_whitespace($content, $is_script = false)
+   private function remove_whitespace($content, $tag = '')
    {
-      $content = trim($content);
       $content = str_replace("\t", ' ', $content);
 
-      if (!$is_script) {
-         $content = str_replace(["\r\n", "\n", '\r\n', '\n'], '', $content);
+      if ('script' !== $tag) {
+         $content = str_replace(["\r\n", "\n", '\r\n', '\n'], ' ', $content);
       }
 
       while (stristr($content, '  ')) {
