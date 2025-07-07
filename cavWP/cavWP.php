@@ -66,6 +66,10 @@ final class cavWP
          new SEO_Links\Admin_Page();
       }
 
+      if (get_option('cav-activity_log')) {
+         new Activity_Log\Register();
+      }
+
       if (get_option('cav-health_check')) {
          new Health_Check();
       }

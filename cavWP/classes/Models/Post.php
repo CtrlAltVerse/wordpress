@@ -2,7 +2,6 @@
 
 namespace cavWP\Models;
 
-use WP_Error;
 use WP_Post;
 
 /**
@@ -124,7 +123,7 @@ class Post
     */
    public function get(string $key, string $size = 'thumbnail', array $attrs = [], string $taxonomy = 'category', string $format = '', bool $apply_filter = true, bool $with_html = false, bool $sanitize = true)
    {
-      if(empty($this->data)){
+      if (empty($this->data)) {
          return;
       }
 
@@ -269,7 +268,7 @@ class Post
     */
    public function get_meta(string $key = '', bool $single = true)
    {
-      if(empty($this->data)){
+      if (empty($this->data)) {
          return;
       }
 
@@ -285,10 +284,10 @@ class Post
     */
    public function has_modified()
    {
-      if(empty($this->data)){
+      if (empty($this->data)) {
          return;
       }
 
-      return $this->data->post_date !== $this->data->post_modified;
+      return substr($this->data->post_date, 0, 10) !== substr($this->data->post_modified, 0, 10);
    }
 }

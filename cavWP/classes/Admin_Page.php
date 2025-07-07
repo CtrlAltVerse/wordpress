@@ -126,6 +126,7 @@ final class Admin_Page
       }
 
       flush_rewrite_rules(false);
+      Utils::purge_page_cache('/links');
 
       if ($site_icon_ID = get_option('site_icon')) {
          add_image_size('cav_favicon', 64, 64, true);

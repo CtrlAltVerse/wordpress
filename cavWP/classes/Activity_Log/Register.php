@@ -11,19 +11,24 @@ final class Register
    {
       \add_action('init', [$this, 'create_table']);
 
-      if (\get_option('cav-activity_log-block_fail_logins')
-      && \get_option('cav-activity_log-block_fail_logins_interval')
-      && \get_option('cav-activity_log-block_fail_logins_attempts')) {
+      if (\get_option('cav-activity_log-block_fail_logins') && \get_option('cav-activity_log-block_fail_logins_interval') && \get_option('cav-activity_log-block_fail_logins_attempts')) {
          \add_filter('login_errors', [$this, 'blocks_login'], 1);
       }
+
+      $logger = new Logger();
+      add_action('log_activity', [$logger, 'add'], 10, 7);
 
       $events         = Utils::get_activity_log_events();
       $default_events = new Default_Events();
 
       foreach ($events as $event) {
+         if (empty($event['trigger']['action_hook'])) {
+            continue;
+         }
+
          $method = $event['trigger']['action_hook'];
 
-         if (empty($method) || !method_exists($default_events, $method)) {
+         if (!method_exists($default_events, $method)) {
             continue;
          }
 
