@@ -9,9 +9,9 @@ class Admin_Page
       add_action('admin_menu', [$this, 'register_page']);
    }
 
-   public function _admin_list_unique_urls(): void
+   public function page_content(): void
    {
-      latte_plugin('seo_links', [
+      latte_plugin('page_seo_links', [
          'head_id'       => esc_html__('ID', 'cavwp'),
          'head_url'      => esc_html__('URL', 'cavwp'),
          'head_template' => esc_html__('Template', 'cavwp'),
@@ -30,7 +30,7 @@ class Admin_Page
          $name,
          'manage_options',
          'cavwp-seo_links',
-         [$this, '_admin_list_unique_urls'],
+         [$this, 'page_content'],
          100,
       );
    }

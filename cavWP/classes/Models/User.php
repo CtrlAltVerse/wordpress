@@ -2,7 +2,6 @@
 
 namespace cavWP\Models;
 
-use WP_Error;
 use WP_User;
 
 /**
@@ -40,9 +39,12 @@ class User
 
       if ($this->data) {
          $this->ID = (int) $this->data->ID;
-      } else {
-         return new WP_Error('user_not_found', 'User not found');
       }
+   }
+
+   public function exists()
+   {
+      return !empty($this->ID);
    }
 
    public function get($key, $size = 96, $attrs = [])
@@ -57,6 +59,7 @@ class User
          'url '     => 'user_url',
          'name'     => 'display_name',
          'gravatar' => 'avatar',
+         'edit_url' => 'edit',
          default    => $key,
       };
 
@@ -70,6 +73,10 @@ class User
 
       if ('permalink' === $key) {
          return get_author_posts_url($this->ID);
+      }
+
+      if ('edit' === $key) {
+         return get_edit_user_link($this->ID);
       }
 
       $value = \get_user_meta($this->ID, $key, true);

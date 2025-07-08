@@ -68,6 +68,7 @@ final class cavWP
 
       if (get_option('cav-activity_log')) {
          new Activity_Log\Register();
+         new Activity_Log\Admin_Page();
       }
 
       if (get_option('cav-health_check')) {

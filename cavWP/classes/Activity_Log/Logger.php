@@ -3,6 +3,7 @@
 namespace cavWP\Activity_Log;
 
 use DateTimeImmutable;
+use DateTimeZone;
 use WP_Error;
 
 class Logger
@@ -103,6 +104,31 @@ class Logger
       );
    }
 
+   /**
+     * @param int $activity_ID
+    */
+   public function del(array|int $activity_ID)
+   {
+      global $wpdb;
+      $table_name = Utils::get_table_name($wpdb->prefix);
+
+      if (is_array($activity_ID)) {
+         $activity_ID = map_deep($activity_ID, 'sanitize_text_field');
+         $value       = ' IN (' . implode(',', $activity_ID) . ')';
+      } else {
+         $activity_ID = sanitize_text_field($activity_ID);
+         $value       = ' = ' . $activity_ID;
+      }
+
+      return $wpdb->query(
+         $wpdb->prepare(
+            'DELETE FROM %i WHERE `activity_ID` ' . $value,
+            $table_name,
+         ),
+         ARRAY_A,
+      );
+   }
+
    public function get(string $type, $query = [], $columns = [])
    {
       $type_a = $this->checks_type($type);
@@ -111,32 +137,26 @@ class Logger
          return $type_a;
       }
 
-      $columns        = $this->parse_columns($columns, $type_a['columns'] ?? []);
-      $where          = $this->parse_where($type, $query);
-      $details_column = $columns['columns']['entity_details'] ?? false;
+      $columns = $this->parse_columns($columns, $type_a['columns'] ?? []);
+      $where   = $this->parse_where($type, $query);
 
-      global $wpdb;
+      return $this->query($columns, $where);
+   }
 
-      $table_name = Utils::get_table_name($wpdb->prefix);
+   public function get_all($page = null, $per_page = null, $order = ['activity_ID', 'desc'], $search = null)
+   {
+      $columns = $this->parse_columns([
+         'activity_ID'     => 'id',
+         'activity_type'   => 'event',
+         'entity_ID'       => 'entity_ID',
+         'entity_details'  => 'content',
+         'activity_time'   => 'date',
+         'current_user_ID' => 'user',
+         'current_IP'      => 'ip',
+         'current_ua'      => 'ua',
+      ]);
 
-      $activities = $wpdb->get_results(
-         "SELECT {$columns['query']} FROM `{$table_name}` WHERE {$where};",
-         ARRAY_A,
-      );
-
-      if (empty($activities)) {
-         return [];
-      }
-
-      foreach ($activities as $activity) {
-         if (!empty($details_column)) {
-            $activity[$details_column] = maybe_unserialize($activity[$details_column]);
-         }
-
-         $activities[] = $activity;
-      }
-
-      return $activities;
+      return $this->query($columns, page: $page, per_page: $per_page, order: $order, search: $search);
    }
 
    public function get_last(string $type, $query = [], $columns = [])
@@ -240,26 +260,6 @@ class Logger
       return $types[$type];
    }
 
-   /**
-    * @ignore
-    *
-     * @param int $activity_ID
-    */
-   private function del(int $activity_ID)
-   {
-      global $wpdb;
-      $table_name = Utils::get_table_name($wpdb->prefix);
-
-      return $wpdb->query(
-         $wpdb->prepare(
-            'DELETE FROM %s WHERE activity_ID = %d',
-            $table_name,
-            $activity_ID,
-         ),
-         ARRAY_A,
-      );
-   }
-
    private function get_user_agent($default = null): ?string
    {
       $user_agent = $default ?? $_SERVER['HTTP_USER_AGENT'] ?? null;
@@ -294,21 +294,8 @@ class Logger
 
       $columns = wp_parse_args($columns, wp_parse_args($type_columns, $default_columns));
 
-      /*
-      TODO:
-      $datetime = new DateTime($row['activity_time_gmt'], new DateTimeZone('UTC'));
-      $datetime->setTimezone(new DateTimeZone($local_tz));
-      $local_time = $datetime->format('Y-m-d H:i:s');
-      */
-
       foreach ($columns as $name => $rename) {
-         if (empty($rename)) {
-            continue;
-         }
-
-         if ('activity_time' === $name) {
-            $local_tz    = wp_timezone_string();
-            $columns_s[] = "CONVERT_TZ(activity_time_gmt, 'UTC', '{$local_tz}') AS `{$rename}`";
+         if (empty($rename) || 'activity_time' === $name) {
             continue;
          }
 
@@ -366,5 +353,72 @@ class Logger
       }
 
       return implode(' AND ', $where);
+   }
+
+   private function query($columns, $where = null, $page = null, $per_page = null, $order = null, $search = null)
+   {
+      global $wpdb;
+
+      $table_name = Utils::get_table_name($wpdb->prefix);
+
+      $_where = '';
+
+      if (!is_null($where)) {
+         $_where = " WHERE {$where}";
+      }
+
+      if (!is_null($search)) {
+         $search = sanitize_text_field($search);
+
+         if (empty($_where)) {
+            $_where = " WHERE `entity_details` LIKE '%{$search}%'";
+         } else {
+            $_where .= " AND `entity_details` LIKE '%{$search}%'";
+         }
+      }
+
+      $_page = '';
+
+      if (!is_null($page)) {
+         $_page = " LIMIT {$page}, {$per_page}";
+      }
+
+      $_order = '';
+
+      if (!is_null($order)) {
+         $order[1] = strtoupper($order[1]);
+         $_order   = " ORDER BY `{$order[0]}` {$order[1]}";
+      }
+
+      $activities = $wpdb->get_results(
+         "SELECT {$columns['query']} FROM `{$table_name}`{$_where}{$_order}{$_page};",
+         ARRAY_A,
+      );
+
+      if (empty($activities)) {
+         return [];
+      }
+
+      $details_column = $columns['columns']['entity_details']    ?? false;
+      $time_column    = $columns['columns']['activity_time']     ?? false;
+      $gmt_column     = $columns['columns']['activity_time_gmt'] ?? false;
+
+      $activities_p = [];
+
+      foreach ($activities as $activity) {
+         if (!empty($details_column)) {
+            $activity[$details_column] = maybe_unserialize($activity[$details_column]);
+         }
+
+         if (!empty($gmt_column) && !empty($time_column)) {
+            $datetime               = new DateTimeImmutable($activity[$gmt_column], new DateTimeZone('UTC'));
+            $new_datetime           = $datetime->setTimezone(wp_timezone());
+            $activity[$time_column] = $new_datetime->format('Y-m-d H:i:s');
+         }
+
+         $activities_p[] = $activity;
+      }
+
+      return $activities_p;
    }
 }
