@@ -46,10 +46,10 @@ class Table extends WP_List_Table
             }
             break;
 
-         case 'entity_ID':
-         case 'event':
          case 'ip':
          case 'ua':
+         case 'entity_ID':
+         case 'event':
          default:
             return $item[$column];
       }
@@ -62,6 +62,28 @@ class Table extends WP_List_Table
       ];
 
       return sprintf('%1$s %2$s', $item['event'], $this->row_actions($actions));
+   }
+
+   public function column_ip($item)
+   {
+      $actions = [
+         'view' => sprintf(
+            '<a href="https://who.is/whois-ip/ip-address/%s" target="_blank">%s</a>',
+            urlencode($item['ip']),
+            esc_html__('Parse', 'cavwp'),
+         ),
+      ];
+
+      return sprintf('%1$s %2$s', $item['ip'], $this->row_actions($actions));
+   }
+
+   public function column_ua($item)
+   {
+      $actions = [
+         'view' => '<a href="https://udger.com/resources/online-parser?Fheaders=User-Agent%3A+' . urlencode($item['ua']) . '&Fip=&test=5581&action=analyze" target="_blank">' . esc_html__('Parse', 'cavwp') . '</a>',
+      ];
+
+      return sprintf('%1$s %2$s', $item['ua'], $this->row_actions($actions));
    }
 
    public function do_bulk_actions(): void

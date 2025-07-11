@@ -15,6 +15,10 @@ final class Default_Events
    {
       $post = (array) $WP_Post;
 
+      if ('revision' === $post['post_type']) {
+         return;
+      }
+
       unset($post['comment_status'], $post['filter'], $post['ID'], $post['ping_status'], $post['pinged'], $post['post_content_filtered'], $post['post_content'], $post['post_date_gmt'], $post['post_excerpt'], $post['post_modified_gmt'], $post['post_status'], $post['to_ping']);
 
       $this->Logger->add(
@@ -49,6 +53,22 @@ final class Default_Events
          'user_deleted',
          $user_ID,
          $user,
+      );
+   }
+
+   public function pre_get_posts($query): void
+   {
+      if (!$query->is_search()) {
+         return;
+      }
+
+      $this->Logger->add(
+         'search',
+         details: [
+            'term'  => $query->get('s'),
+            'found' => $query->found_posts,
+            'url'   => (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}",
+         ],
       );
    }
 

@@ -80,16 +80,14 @@ final class Metatags
          $attachment = get_post($metatags['og:image']);
 
          if ($attachment) {
-            $metatags['og:image']      = \wp_get_attachment_image_url($metatags['og:image'], 'medium');
+            $metatags['og:image']      = \wp_get_attachment_image_url($metatags['og:image'], 'full');
             $metatags['og:image:type'] = $attachment->post_mime_type;
             $metatags['og:image:alt']  = \get_post_meta($attachment->ID, '_wp_attachment_image_alt', true);
 
             $attachment_metadata = \wp_get_attachment_metadata($attachment->ID);
 
-            if (!empty($attachment_metadata['sizes']['medium'])) {
-               $metatags['og:image:width']  = $attachment_metadata['sizes']['medium']['width']  ?? false;
-               $metatags['og:image:height'] = $attachment_metadata['sizes']['medium']['height'] ?? false;
-            }
+            $metatags['og:image:width']  = $attachment_metadata['width']  ?? false;
+            $metatags['og:image:height'] = $attachment_metadata['height'] ?? false;
          }
       }
 

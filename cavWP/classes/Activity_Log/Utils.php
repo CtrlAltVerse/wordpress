@@ -38,6 +38,9 @@ final class Utils
             'trigger'        => ['action_hook' => 'user_register', 'num_args' => 2],
             'columns_labels' => ['entity_details' => 'userdata'],
          ],
+         'search' => [
+            'trigger' => ['action_hook' => 'pre_get_posts'],
+         ],
       ];
 
       return apply_filters('cav_activity_log_events', $default_events);
