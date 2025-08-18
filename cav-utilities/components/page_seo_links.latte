@@ -1,0 +1,97 @@
+<div class="wrap">
+   <h1>{esc_html(get_admin_page_title())}</h1>
+   <p n:if="empty($reports)">
+      <em>{esc_html__('No templates have been identified in the current theme yet.',
+         'cav-utilities')}</em>
+   </p>
+   {foreach $reports as $report}
+   <div class="my-5 text-base">
+      <div class="flex flex-col gap-2 p-3 rounded-t bg-neutral-300">
+         <h2 class="!mt-0 !mb-0">
+            <a href="{esc_url($report['url'])}" target="_blank" n:if="!empty($report['url'])">
+               {esc_url($report['url'])}
+            </a>
+         </h2>
+         <div class="flex gap-4">
+            <div class="flex divide-x-2 divide-neutral-300 rounded-sm bg-stone-400 py-0.5 font-semibold"
+                 n:if="$report['type']">
+               <div class="px-1.5">
+                  {switch $report['type']}
+                  {case 'post'}
+                  {esc_html__('Post')}
+                  {case 'term'}
+                  {esc_html__('Term')}
+                  {case 'user'}
+                  {esc_html__('Author')}
+                  {case 'post_type'}
+                  {esc_html__('Archive')}
+                  {case 'archive'}
+                  {esc_html__('Archive')}
+                  {case 'home'}
+                  {esc_html__('Homepage')}
+                  {case 'search'}
+                  {esc_html__('Search')}
+                  {case 'custom'}
+                  {esc_html__('Custom')}
+                  {case 'date'}
+                  {esc_html__('Date')}
+                  {/switch}
+               </div>
+               <div class="px-1.5" n:if="!empty($report['group'])">{$report['group']}</div>
+               <div class="px-1.5" n:if="!empty($report['id'])">{$report['id']}</div>
+            </div>
+
+            <span class="rounded-sm bg-stone-400 py-0.5 px-1.5 font-mono"
+                  n:if="!empty($report['file'])">{$report['file']}</span>
+
+            {if 'post' === $report['type'] && !empty($report['id'])}
+            {edit_post_link(null, '<span class="rounded-sm bg-stone-400 py-0.5 px-1.5">', '</span></span>',
+            $report['id'])}
+            {/if}
+            {if 'term' === $report['type'] && !empty($report['id'])}
+            {edit_term_link(null, '<span class="rounded-sm bg-stone-400 py-0.5 px-1.5">', '</span></span>',
+            $report['id'])}
+            {/if}
+            {if 'user' === $report['type'] && !empty($report['id'])}
+            {edit_user_link(null, '<span class="rounded-sm bg-stone-400 py-0.5 px-1.5">', '</span></span>',
+            $report['id'])}
+            {/if}
+         </div>
+      </div>
+      <div class="bg-stone-400 font-semibold py-1 px-3">DESKTOP</div>
+      <div class="flex bg-zinc-200 py-4 px-3" n:if="$report['screenshot']" class="flex">
+         <div class="flex justify-around gap-2 grow-1">
+            {foreach $report['report'] as $key => $category}
+            {var $score = cavWP\SEO_Links\Utils::decimal_to_percent($category['score'])}
+            <div class="flex flex-col items-center gap-2 px-2 text-lg">
+               <span
+                     class="flex justify-center items-center rounded-full size-20 text-3xl {$score >= 90 ? 'bg-green-300' : ($score >= 50 ? 'bg-orange-300' : 'bg-red-300')}">{$score}</span>
+               <h3 class="font-semibold !my-0">{$category['title']}</h3>
+               {if !empty($category['audits'])}
+               <a class="thickbox" name="{$category['title']}"
+                  href="#TB_inline?&width=772&height=851&inlineId=desktop-{$key}">{count($category['audits'])}
+                  issues</a>
+               <div id="desktop-{$key}" style="display: none;">
+                  <ol class="!py-4">
+                     {foreach $category['audits'] as $audit}
+                     <li>
+                        <strong>{$audit['title']}</strong>
+                        <p>{cavWP\SEO_Links\Utils::parse_md_link($audit['description'])|noescape}</p>
+                        <pre><code>{cavWP\SEO_Links\Utils::parse_audit($audit)}</code></pre>
+                     </li>
+                     {/foreach}
+                  </ol>
+               </div>
+               {/if}
+            </div>
+            {/foreach}
+         </div>
+         <div class="w-96 aspect-video">
+            <img src="{$report['screenshot']|nocheck}"
+                 class="!border !border-stone-400 size-full object-cover object-top"
+                 alt="" />
+         </div>
+      </div>
+   </div>
+   {/foreach}
+</div>

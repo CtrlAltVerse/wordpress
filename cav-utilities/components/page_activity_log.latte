@@ -1,0 +1,11 @@
+<div class="wrap">
+   <h1>{esc_html(get_admin_page_title())}</h1>
+   <p n:if="empty(logs)">
+      <em>{esc_html__('No activities have been logged yet.', 'cav-utilities')}</em>
+   </p>
+   <form method="post">
+      {$table->prepare_items()}
+      {$table->search_box('Search', 'search')}
+      {$table->display()}
+   </form>
+</div>

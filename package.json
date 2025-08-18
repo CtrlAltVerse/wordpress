@@ -3,7 +3,7 @@
    "version": "1.0.0",
    "description": "Handles assets for the CAV WordPress Plugin.",
    "main": "index.ts",
-   "author": "CtrlAltVerso",
+   "author": "CtrlAltVersœ",
    "license": "Apache-2.0",
    "scripts": {
       "build": "node ./scripts/updateAssets.js && npm run admin -- --minify && npm run links -- --minify",

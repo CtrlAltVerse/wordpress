@@ -17,7 +17,7 @@ module.exports = {
    },
    output: {
       filename: 'admin.js',
-      path: path.resolve(__dirname, 'cavWP', 'assets'),
+      path: path.resolve(__dirname, 'cav-utilities', 'assets'),
    },
    optimization: {
       minimize: true,
