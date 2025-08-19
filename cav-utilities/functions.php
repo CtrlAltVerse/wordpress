@@ -36,9 +36,13 @@ if (!function_exists('debug')) {
          return $args[0];
       }
 
-      $id    = 'DEBUG';
       $files = debug_backtrace();
-      $log   = "\n[{$id}] {$files[0]['file']}:{$files[0]['line']}";
+
+      $log = "\n[DEBUG]";
+
+      if (!empty($files[0]['file'])) {
+         $log .= " {$files[0]['file']}:{$files[0]['line']}";
+      }
 
       foreach ($args as $key => $arg) {
          $key = str_pad($key, 3, '0', STR_PAD_LEFT);
@@ -80,7 +84,7 @@ if (!function_exists('cav_autoloader')) {
       $class_path = implode(DIRECTORY_SEPARATOR, [CAV_WP_DIR, 'classes', 'AutoLoader.php']);
 
       if (!file_exists($class_path)) {
-         return new \WP_Error('cav_autoloader_missing', esc_attr__('AutoLoader was not found.', 'cav-utilities'));
+         return new \WP_Error('cav_autoloader_missing', 'AutoLoader was not found.');
       }
 
       require_once $class_path;

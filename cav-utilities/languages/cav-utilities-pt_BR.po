@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: CAV WP Plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-07 01:43+0000\n"
-"PO-Revision-Date: 2025-08-18 17:22+0000\n"
+"PO-Revision-Date: 2025-08-18 22:50+0000\n"
 "Last-Translator: Fagner JB.\n"
 "Language-Team: Português do Brasil\n"
 "Language: pt_BR\n"
@@ -169,34 +169,28 @@ msgstr ""
 "sincronizada."
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Networks/Plugin_Options.php:56
-#, fuzzy
 msgid "Auto publish new posts on Facebook"
-msgstr "Auto publica novos posts no Facebook"
+msgstr "Publicar automaticamente novos posts no Facebook"
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Networks/Plugin_Options.php:80
-#, fuzzy
 msgid "Auto publish new posts on Threads"
-msgstr "Auto publica novas postagens em thread"
+msgstr "Publicar automaticamente novos posts no Threads"
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Networks/Plugin_Options.php:36
-#, fuzzy
 msgid "Auto publish new posts on X"
-msgstr "Auto publica novos posts em X"
+msgstr "Publicar automaticamente novos posts no X"
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/functions.php:83
-#, fuzzy
 msgid "AutoLoader was not found."
-msgstr "Autoloader não foi encontrado."
+msgstr "AutoLoader não foi encontrado."
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:158
-#, fuzzy
 msgid "Cache GET requests"
-msgstr "Cache recebe pedidos"
+msgstr "Faz cache de requisições GET"
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Activity_Log/Admin_Page.php:28
-#, fuzzy
 msgid "CAV Activity Logs"
-msgstr "Registro de atividades Cav"
+msgstr "Registro de atividades"
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/SEO_Links/Admin_Page.php:26
 msgid "CAV SEO Analysis"
@@ -236,11 +230,10 @@ msgid "Creates %s."
 msgstr "Cria %s."
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:82
-#, fuzzy
 msgid ""
 "Creates adicional sitemaps and configure content for robots.txt and ads.txt."
 msgstr ""
-"Cria Sitemaps Adicionais e Configura conteúdo para Robots.Txt e Ads.Txt."
+"Cria sitemaps adicionais e configura conteúdo para robots.txt e ads.txt."
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:124
 msgid "Creates opensearch.osdx file"
@@ -259,7 +252,6 @@ msgid "Custom content for robots.txt"
 msgstr "Conteúdo personalizado para robots.txt"
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:359
-#, fuzzy
 msgid "Custom URLs to check"
 msgstr "URLs personalizados para verificar"
 
@@ -272,9 +264,8 @@ msgid "Dashboard Options"
 msgstr "Opções da Administração"
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/functions.php:209
-#, fuzzy
 msgid "Directory for Latte Cache could not be created."
-msgstr "O diretório para o latte cache não poderia ser criado."
+msgstr "O diretório para o Latte Cache não pôde ser criado."
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:22
 msgid "Divulgation"
@@ -310,14 +301,12 @@ msgid "Facebook App ID"
 msgstr ""
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:162
-#, fuzzy
 msgid "Force refresh of CSS files on update"
-msgstr "Força para refrescar arquivos CSS em atualização"
+msgstr "Força carregamento de arquivos CSS quando atualizados"
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:166
-#, fuzzy
 msgid "Force refresh of JS files on update"
-msgstr "Força de atualização dos arquivos Js em atualização"
+msgstr "Força carregamento de arquivos JS quando atualizados"
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Misc.php:192
 msgid "From"
@@ -328,14 +317,12 @@ msgid "Full URL"
 msgstr "URL completo"
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Networks/Plugin_Options.php:92
-#, fuzzy
 msgid "Get Access Token"
-msgstr "Obtenha acesso ao token"
+msgstr "Obtenha token de acesso"
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Networks/Plugin_Options.php:72
-#, fuzzy
 msgid "Get or Renew Page Access Token"
-msgstr "Obtenha ou renova o token de acesso da página"
+msgstr "Obtenha ou renove o token de acesso à página"
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Networks/Plugin_Options.php:111
 msgid "Google Client ID"
@@ -376,23 +363,20 @@ msgid "Media options"
 msgstr "Opções de mídia"
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:113
-#, fuzzy
 msgid "Minify CSS inline"
-msgstr "Mineração de CSS Inline"
+msgstr "Reduzir CSS em linha"
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:109
-#, fuzzy
 msgid "Minify JS inline"
-msgstr "Minifeiçoes Js Inline"
+msgstr "Reduzir JS em linha"
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:26
 msgid "Networks"
 msgstr "Redes"
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/functions.php:165
-#, fuzzy
 msgid "Not in pages."
-msgstr "Não em páginas."
+msgstr "Fora de pages."
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:283
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:338
@@ -463,9 +447,8 @@ msgid "Precisa ser uma data posterior a %s."
 msgstr ""
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:350
-#, fuzzy
 msgid "Regularly test templates with PageSpeed."
-msgstr "Testar regularmente Templates com Pagespeed."
+msgstr "Testar regularmente templates com Pagespeed."
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:117
 msgid "Remove comments"
@@ -476,9 +459,8 @@ msgid "Remove WP default tags"
 msgstr "Remover tags WP padrão"
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:224
-#, fuzzy
 msgid "Restrict REST API access to logged-in users only."
-msgstr "Restringir o acesso API apenas aos usuários Logged-In."
+msgstr "Restringir o acesso à API apenas a usuários logados."
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Misc.php:199
 msgid "Role"

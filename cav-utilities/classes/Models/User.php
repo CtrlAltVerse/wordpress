@@ -50,10 +50,6 @@ class User
 
    public function get($key, $size = 96, $attrs = [], $default = null, $apply_filter = true)
    {
-      if (!$this->exists()) {
-         return;
-      }
-
       $key = match ($key) {
          'user_id', 'id' => 'ID',
          'nicename', 'username', 'slug' => 'user_nicename',
@@ -68,12 +64,20 @@ class User
          default    => $key,
       };
 
+      $value = null;
+
+      if ('avatar' === $key) {
+         $value = \get_avatar($this->ID, $size, '', '', $attrs);
+      }
+
+      if (!$this->exists()) {
+         return $value;
+      }
+
       if (isset($this->data->{$key})) {
          $value = $this->data->__get($key);
       } elseif ('socials' === $key) {
          $value = $this->get_socials();
-      } elseif ('avatar' === $key) {
-         $value = \get_avatar($this->data->user_email, $size, '', '', $attrs);
       } elseif ('permalink' === $key) {
          $value = \get_author_posts_url($this->ID);
       } elseif ('posts' === $key) {
@@ -84,7 +88,7 @@ class User
          ]);
       } elseif ('edit' === $key) {
          $value = \get_edit_user_link($this->ID);
-      } else {
+      } elseif (empty($value)) {
          $value = \get_user_meta($this->ID, $key, true);
 
          if ('' === $value) {

@@ -52,7 +52,7 @@ final class cavWP
       add_action('init', [$this, 'init_hook'], 9);
       add_action('wp', [$this, 'load_parse_content']);
 
-      $this->load_classes();
+      new After_Theme();
    }
 
    public function block_ips(): void
@@ -65,10 +65,7 @@ final class cavWP
    public function init_hook(): void
    {
       \add_rewrite_tag('%cav%', '([a-z-]{12})');
-   }
 
-   public function load_classes(): void
-   {
       new Networks\Register();
       new Admin_Page();
       new Register_Assets();

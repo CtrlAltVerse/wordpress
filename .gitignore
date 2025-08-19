@@ -5,4 +5,5 @@ uploads/
 vendor/
 .phpdoc/build
 .phpdoc/cache
-cavWP/assets/
+cav-utilities/assets/
+cav-utilities/languages/*backup*

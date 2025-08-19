@@ -267,7 +267,7 @@ final class Admin_Page
          return;
       }
 
-      $success = wp_mail(get_option('admin_email'), '[CAV WP Plugin] Test mail', 'This is a test mail.');
+      $success = wp_mail(get_option('admin_email'), '[' . get_bloginfo('name') . '] Test mail', 'This is a test mail.');
       $test    = $success ? 'test_mail-yes' : 'test_mail-no';
 
       if (wp_safe_redirect(admin_url('options-general.php?page=cavwp&cav_notice=' . $test))) {
