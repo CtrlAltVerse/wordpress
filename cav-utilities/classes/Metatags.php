@@ -24,9 +24,11 @@ final class Metatags
          return [];
       }
 
-      $User = new User();
+      $User  = new User();
+      $title = $User->get('display_name');
 
-      $metas['og:type'] = 'profile';
+      $metas['og:title'] = $title;
+      $metas['og:type']  = 'profile';
 
       if ($first_name = $User->get('first_name')) {
          $metas['og:profile:first_name'] = $first_name;
@@ -39,6 +41,12 @@ final class Metatags
       if ($username = $User->get('username')) {
          $metas['og:profile:username'] = $username;
       }
+
+      $metas['og:url']      = $User->get('link');
+      $metas['description'] = [
+         'type'  => 'name',
+         'value' => sprintf(esc_attr__('See all publications of %s', 'cav-utilities'), $title),
+      ];
 
       return $metas;
    }
@@ -53,6 +61,7 @@ final class Metatags
          $this->get_term_tags(),
          $this->get_date_tags(),
          $this->get_post_type_tags(),
+         $this->get_search_tags(),
       );
 
       /**
@@ -255,6 +264,25 @@ final class Metatags
       return $metas;
    }
 
+   private function get_search_tags()
+   {
+      if (!\is_search()) {
+         return [];
+      }
+
+      $query             = get_search_query();
+      $metas['og:title'] = sprintf(esc_attr__('%s - Search Results', 'cav-utilities'), $query);
+
+      $metas['description'] = [
+         'type'  => 'name',
+         'value' => sprintf(esc_attr__('See all publications with %s', 'cav-utilities'), $query),
+      ];
+
+      $metas['og:url'] = get_search_link($query);
+
+      return $metas;
+   }
+
    private function get_singular_tags()
    {
       if (!\is_singular()) {
@@ -282,8 +310,7 @@ final class Metatags
          }
       }
 
-      // TODO
-      $twitter_creator = $Post->get('cav-twitter_creator');
+      $twitter_creator = $Post->get('author:x_twitter');
 
       if (!empty($twitter_creator)) {
          $metas['twitter:creator'] = [
@@ -326,13 +353,19 @@ final class Metatags
          return [];
       }
 
-      $Term = new Term();
+      $Term  = new Term();
+      $title = $Term->get('title');
 
-      $metas['og:title'] = $Term->get('title');
+      $metas['og:title'] = $title;
+      $description       = $Term->get('description');
+
+      if (!empty($description)) {
+         $description = sprintf(esc_attr__('See all publications of %s', 'cav-utilities'), $title);
+      }
 
       $metas['description'] = [
          'type'  => 'name',
-         'value' => $Term->get('description'),
+         'value' => $description,
       ];
 
       $metas['og:url'] = $Term->get('link');
