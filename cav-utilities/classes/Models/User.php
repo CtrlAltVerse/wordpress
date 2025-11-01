@@ -74,7 +74,7 @@ class User
          return $value;
       }
 
-      if (isset($this->data->{$key})) {
+      if (in_array($key, array_keys(get_class_vars(get_class($this->data)))) || in_array($key, array_keys((array) $this->data->data))) {
          $value = $this->data->__get($key);
       } elseif ('socials' === $key) {
          $value = $this->get_socials();
@@ -110,13 +110,18 @@ class User
       return \get_user_meta($this->ID, $key, $sigle);
    }
 
-   public function get_socials()
+   public function get_socials($only = [])
    {
       $all_socials  = Utils::get_services('profile');
       $user_socials = [];
 
       foreach ($all_socials as $key => $social) {
-         $social_value = \get_user_meta($this->ID, $key, true);
+         if (!empty($only) && !in_array($key, $only)) {
+            continue;
+         }
+
+         $social_value  = \get_user_meta($this->ID, $key, true);
+         $social['raw'] = $social_value;
 
          if (empty($social_value)) {
             continue;

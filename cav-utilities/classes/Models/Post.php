@@ -2,7 +2,8 @@
 
 namespace cavWP\Models;
 
-use cavWP\Networks\Utils;
+use cavWP\Networks\Utils as NetworksUtils;
+use cavWP\Utils;
 use WP_Post;
 
 /**
@@ -176,7 +177,7 @@ class Post
 
       if (in_array($key, ['ancestors', 'page_template', 'post_category', 'tags_input'])) {
          $value = $this->data->__get($key);
-      } elseif (isset($this->data->{$key})) {
+      } elseif (in_array($key, array_keys(get_class_vars(get_class($this->data))))) {
          $value = $this->data->{$key};
 
          if ($sanitize) {
@@ -195,6 +196,10 @@ class Post
 
             if ('post_excerpt' === $key) {
                $value = apply_filters('the_excerpt', $value);
+            }
+
+            if (in_array($key, ['post_date', 'post_modified']) && in_array($format, ['date', 'time'])) {
+               $format = get_option($format . '_format');
             }
 
             if ('post_date' === $key) {
@@ -221,17 +226,27 @@ class Post
                }
             }
          }
+      } elseif ('extended' === $key) {
+         $value = \get_extended($this->data->post_content);
       } elseif ('permalink' === $key) {
          $value = esc_url(get_permalink($this->data));
       } elseif ('share' === $key) {
          $type_or_keys = empty($attrs) ? 'share' : $attrs;
          $value        = $this->get_shares($type_or_keys);
       } elseif ('thumbnail' === $key) {
-         if (has_post_thumbnail($this->data)) {
-            if ($with_html) {
-               $value = get_the_post_thumbnail($this->data, $size, $attrs);
+         if (has_post_thumbnail($this->data) || 'attachment' === $this->data->post_type) {
+            if ('attachment' === $this->data->post_type) {
+               if ($with_html) {
+                  $value = wp_get_attachment_image($this->ID, $size, false, $attrs);
+               } else {
+                  $value = wp_get_attachment_image_url($this->ID, $size);
+               }
             } else {
-               $value = get_the_post_thumbnail_url($this->data, $size);
+               if ($with_html) {
+                  $value = get_the_post_thumbnail($this->data, $size, $attrs);
+               } else {
+                  $value = get_the_post_thumbnail_url($this->data, $size);
+               }
             }
          } else {
             if ($with_html) {
@@ -248,7 +263,9 @@ class Post
          $language = get_bloginfo('language');
 
          $words_per_minute = match ($language) {
-            default => 183,
+            'pt-BR' => 135,
+            // wp-includes/js/dist/editor.js:32458
+            default => 189,
          };
 
          $content = count(explode(' ', strip_tags($this->data->post_content)));
@@ -274,6 +291,14 @@ class Post
          $value = $author->get(str_replace('author:', '', $key), size: $size, attrs: $attrs);
       } else {
          $value = get_post_meta($this->ID, $key, true);
+
+         if (!empty($size)) {
+            $image = Utils::maybe_image($value, $size, $attrs);
+
+            if ($image) {
+               $value = $image;
+            }
+         }
 
          if ('' === $value) {
             $value = $default;
@@ -304,7 +329,7 @@ class Post
 
    public function get_shares($keys = 'share')
    {
-      $all_shares = Utils::get_services($keys);
+      $all_shares = NetworksUtils::get_services($keys);
 
       $post_shares = [];
 
@@ -335,7 +360,7 @@ class Post
       return substr($this->data->post_date, 0, 10) !== substr($this->data->post_modified, 0, 10);
    }
 
-   public function related($number = 3, $primary = 'term', $secondary = 'category', $exclude = [])
+   public function related($number = 3, $primary = 'term', $secondary = 'category', $exclude = [], $extra_queries = [])
    {
       if (empty($this->data)) {
          return [];
@@ -348,9 +373,12 @@ class Post
       $exclude[] = $this->ID;
 
       $query_args = [
-         'post_type'      => $this->data->post_type,
-         'posts_per_page' => $number + count($exclude),
+         'post_type'        => $this->data->post_type,
+         'posts_per_page'   => $number + count($exclude),
+         'suppress_filters' => false,
       ];
+
+      $query_args = wp_parse_args($extra_queries, $query_args);
 
       switch ($primary) {
          case 'term':

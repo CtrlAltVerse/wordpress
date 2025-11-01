@@ -25,7 +25,7 @@ class PageSpeed
    public function run_test(string $url, $strategy = 'DESKTOP')
    {
       $request = wp_remote_get("{$this->base_url}/runPagespeed?" . $this->set_params($url, $strategy), [
-         'timeout' => 111,
+         'timeout' => 222,
       ], [
          'cache_duration' => '1 week',
       ]);

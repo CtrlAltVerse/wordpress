@@ -18,7 +18,6 @@ final class LinksPage
       \add_action('links_head', 'wp_site_icon', 99);
 
       \add_filter('walker_nav_menu_start_el', [$this, 'adds_description'], 10, 2);
-      // TODO: ADD bg color
    }
 
    public function add_rewrite(): void
@@ -39,9 +38,10 @@ final class LinksPage
 
          global $wp_styles;
 
-         $href = $wp_styles->registered[$handle]->src;
-         $ver  = $wp_styles->registered[$handle]->ver;
-         $href = add_query_arg('ver', $ver, $href);
+         $url = $wp_styles->registered[$handle]->src;
+         $ver = $wp_styles->registered[$handle]->ver;
+
+         $href = apply_filters('style_loader_src', add_query_arg('ver', $ver, $url), $handle);
 
          $tag = '<link rel="stylesheet" id="' . $handle . '-css" href="' . esc_url($href) . '" type="text/css" media="all" />';
 
@@ -57,7 +57,7 @@ final class LinksPage
          return $output;
       }
 
-      return str_replace('</a>', '<br><span class="menu-item-description">' . $menu_item->description . '</span></a>', $output);
+      return str_replace('</a>', '<span class="menu-item-description">' . $menu_item->description . '</span></a>', $output);
    }
 
    public function prints_content(): void

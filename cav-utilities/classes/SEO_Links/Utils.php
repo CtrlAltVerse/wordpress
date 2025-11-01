@@ -6,6 +6,10 @@ class Utils
 {
    public static function decimal_to_percent($decimal)
    {
+      if (!is_numeric($decimal)) {
+         return 0;
+      }
+
       return number_format($decimal * 100);
    }
 
@@ -56,6 +60,10 @@ class Utils
 
       $reports = $wpdb->get_results("SELECT * FROM {$table} WHERE `url` IN {$urls} ORDER BY datetime DESC;", ARRAY_A);
 
+      if (empty($reports)) {
+         return [];
+      }
+
       $links = array_map(function($link) use ($reports) {
          $url_reports = array_filter($reports, fn($report) => $report['url'] === $link['url']);
 
@@ -78,12 +86,13 @@ class Utils
 
    public static function parse_audit($audit)
    {
-      if(empty($audit['details']['items'])){
+      if (empty($audit['details']['items'])) {
          return '';
       }
 
       $return = [];
-      foreach($audit['details']['items'] as $item){
+
+      foreach ($audit['details']['items'] as $item) {
          $return[] = $item['url'] ?? $item['node']['snippet'];
       }
 

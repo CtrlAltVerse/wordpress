@@ -152,19 +152,17 @@ class Table extends WP_List_Table
          $orderby = 'time_gmt';
       }
 
-      $logger      = new Logger();
-      $this->items = $logger->get_all(order: [$orderby, $order], search: $_POST['s'] ?? null);
+      $logger = new Logger();
 
       $per_page     = $this->get_items_per_page('cav_activity_logs_per_page');
       $current_page = $this->get_pagenum();
-      $total_items  = count($this->items);
-
-      $this->items = array_slice($this->items, ($current_page - 1) * $per_page, $per_page);
+      $query        = $logger->get_all(page: $current_page, per_page: $per_page, order: [$orderby, $order], search: $_POST['s'] ?? null);
+      $this->items  = $query['items'];
 
       $this->set_pagination_args([
-         'total_items' => $total_items,
+         'total_items' => $query['total'],
          'per_page'    => $per_page,
-         'total_pages' => ceil($total_items / $per_page),
+         'total_pages' => ceil($query['total'] / $per_page),
       ]);
    }
 

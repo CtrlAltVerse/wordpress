@@ -67,7 +67,7 @@ class Utils
             'name'    => 'Last.fm',
             'icon'    => 'fa-brands fa-lastfm ri-infinity-line',
             'color'   => 'd1170e',
-            'profile' => 'https://www.last.fm/user/@%user%',
+            'profile' => 'https://www.last.fm/user/%user%',
          ],
          'deezer' => [
             'name'    => 'Deezer',

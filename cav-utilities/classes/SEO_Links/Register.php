@@ -160,8 +160,7 @@ class Register
 
       foreach ($links as $link) {
          $url    = $link['url'];
-         $_url   = str_replace('dbands.local', 'dbands.com.br', $link['url']);
-         $report = $PageSpeed->run_test($_url);
+         $report = $PageSpeed->run_test($url);
          Utils::save_report($url, $report);
       }
    }

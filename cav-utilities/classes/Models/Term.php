@@ -25,6 +25,8 @@ class Term
          $this->data = get_term_by('ID', $term, $taxonomy);
       } elseif (is_a($term, 'WP_Term')) {
          $this->data = $term;
+      } elseif (is_a($term, '\cavWP\Models\Term')) {
+         $this->data = $term->data;
       } elseif (is_string($term)) {
          $this->data = get_term_by('name', $term, $taxonomy);
       } elseif (is_array($term) && !empty($term['field']) && !empty($term['value'])) {
@@ -34,13 +36,18 @@ class Term
       if ($this->data) {
          $this->ID = $this->data->term_id;
       } else {
-         return new WP_Error('term_not_found', 'Term not found');
+         new WP_Error('term_not_found', 'Term not found');
       }
    }
 
    public function __get($key)
    {
       return $this->get($key);
+   }
+
+   public function __invoke()
+   {
+      return $this->data;
    }
 
    public function get(string $key, mixed $default = null, $image_size = null, $image_attrs = [], $apply_filter = true)
@@ -56,7 +63,11 @@ class Term
          default            => $key,
       };
 
-      if (isset($this->data->{$key})) {
+      if (empty($this->data)) {
+         return;
+      }
+
+      if (in_array($key, array_keys(get_class_vars(get_class($this->data))))) {
          $value = $this->data->{$key};
       } elseif ('children' === $key) {
          $value = get_terms([
@@ -94,5 +105,26 @@ class Term
    public function get_meta($key = '', $single = true)
    {
       return get_term_meta($this->ID, $key, $single);
+   }
+
+   public function get_posts($filters = [])
+   {
+      $taxonomy = get_taxonomy($this->data->taxonomy);
+
+      $defaults = [
+         'posts_per_page' => 4,
+         'orderby'        => 'date',
+         'order'          => 'DESC',
+         'post_type'      => $taxonomy->object_type,
+      ];
+
+      $filters['tax_query'] = [[
+         'taxonomy' => $this->data->taxonomy,
+         'terms'    => $this->data->term_id,
+      ]];
+
+      $query_args = wp_parse_args($filters, $defaults);
+
+      return get_posts($query_args);
    }
 }

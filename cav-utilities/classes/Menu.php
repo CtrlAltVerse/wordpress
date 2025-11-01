@@ -34,7 +34,7 @@ final class Menu
       $icon_class = get_post_meta($item->ID, 'menu_icon', true);
 
       if ($icon_class) {
-         return "<i class='{$icon_class}'></i> <span class='menu-item-text'>{$title}</span>";
+         return "<span class='menu-item-text'><i class='{$icon_class} font-normal'></i> <span class='menu-item-title'>{$title}</span></span>";
       }
 
       return $title;

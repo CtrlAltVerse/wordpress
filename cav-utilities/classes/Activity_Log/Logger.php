@@ -158,7 +158,10 @@ class Logger
          'current_ua'      => 'ua',
       ]);
 
-      return $this->query($columns, page: $page, per_page: $per_page, order: $order, search: $search);
+      return [
+         'items' => $this->query($columns, page: $page, per_page: $per_page, order: $order, search: $search),
+         'total' => $this->count(search: $search),
+      ];
    }
 
    public function get_last(string $type, $query = [], $columns = [])
@@ -260,6 +263,33 @@ class Logger
       }
 
       return $types[$type];
+   }
+
+   private function count($where = null, $search = null)
+   {
+      global $wpdb;
+
+      $table_name = Utils::get_table_name($wpdb->prefix);
+
+      $_where = '';
+
+      if (!is_null($where)) {
+         $_where = " WHERE {$where}";
+      }
+
+      if (!is_null($search)) {
+         $search = sanitize_text_field($search);
+
+         if (empty($_where)) {
+            $_where = " WHERE `entity_details` LIKE '%{$search}%'";
+         } else {
+            $_where .= " AND `entity_details` LIKE '%{$search}%'";
+         }
+      }
+
+      return $wpdb->get_var(
+         "SELECT COUNT(activity_ID) FROM `{$table_name}`{$_where};",
+      );
    }
 
    private function get_user_agent($default = null): ?string
