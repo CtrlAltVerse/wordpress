@@ -36,7 +36,7 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.private_key
           chmod 600 ~/.private_key
           rclone config create remote sftp host=${{ secrets.FTP_HOST }} user=${{ vars.SERVER_USER }} key_file=~/.private_key -vv
-          rclone sync .phpdoc/build/ remote:${{ vars.SERVER_FOLDER }} -vv
+          rclone sync .phpdoc/build/ remote:${{ vars.DOCS_FOLDER }} -vv
 
       - name: Send Email
         uses: hilarion5/send-mail@v1

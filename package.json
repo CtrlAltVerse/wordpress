@@ -8,8 +8,8 @@
    "scripts": {
       "build": "node ./scripts/updateAssets.js && npm run admin -- --minify && npm run links -- --minify",
       "dev": "nodemon & npm run admin -- --watch & npm run links -- --watch",
-      "admin": "npx @tailwindcss/cli -i ./assets_dev/admin.css -o ./cavWP/assets/config_page.css",
-      "links": "npx @tailwindcss/cli -i ./assets_dev/links.css -o ./cavWP/assets/links_page.css",
+      "admin": "npx @tailwindcss/cli -i ./assets_dev/admin.css -o ./cav-utilities/assets/config_page.min.css",
+      "links": "npx @tailwindcss/cli -i ./assets_dev/links.css -o ./cav-utilities/assets/links_page.min.css",
       "js": "webpack"
    },
    "devDependencies": {

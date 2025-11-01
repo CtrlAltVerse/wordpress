@@ -1,4 +1,4 @@
-=== CAV WP Plugin ===
+=== CAV Utilities ===
 Contributors: fagnerjb, ctrlaltverse
 Tags: development, seo, performance
 Stable tag: 1.0.0

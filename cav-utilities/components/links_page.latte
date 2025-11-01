@@ -4,12 +4,12 @@
    {do_action('links_head')}
 </head>
 {var $links = wp_nav_menu([
-   'menu'       => $menu,
-   'container'  => 'nav',
-   'menu_class' => 'flex flex-col gap-3',
-   'item_class' => 'bg-black/90 shadow-md shadow-white/20 rounded-md text-center',
-   'link_class' => 'block py-4 px-5',
-   'echo'       => 0,
+'menu' => $menu,
+'container' => 'nav',
+'menu_class' => 'flex flex-col gap-3',
+'item_class' => 'shadow-md shadow-white/20 rounded-md text-center bg-black/65 hover:bg-black/90',
+'link_class' => 'flex flex-col gap-1 py-4 px-5',
+'echo' => 0,
 ])}
 <body class="text-zinc-100 text-lg overflow-x-hidden custom-background">
    <div class="w-screen min-h-screen h-full backdrop-blur-sm bg-black/75">
@@ -18,7 +18,7 @@
             <div class="rounded-full overflow-hidden"><a href="{$site}">{$avatar|noescape}</a></div>
             <h1 class="font-semibold text-2xl"><a href="{$site}">{$name}</a></h1>
             <a href="{$site}" class="text-base">{$domain}</a>
-            <p>{$description}</p>
+            <p>{$description|noescape}</p>
          </header>
          <main class="grow">
             {$links|noescape}

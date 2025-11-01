@@ -29,7 +29,7 @@ jobs:
 
       - name: Install prod dep
         run: |
-          cd cawWP
+          cd cav-utilities
           composer install --no-dev
           rm composer.json composer.lock
           cd ..
@@ -37,7 +37,7 @@ jobs:
       - name: Release WP directory
         uses: 10up/action-wordpress-plugin-deploy@v2
         with:
-          plugin-slug: cawWP
+          plugin-slug: cav-utilities
           svn-username: ${{ secrets.SVN_USERNAME }}
           svn-password: ${{ secrets.SVN_PASSWORD }}
 

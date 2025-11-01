@@ -5,5 +5,5 @@ uploads/
 vendor/
 .phpdoc/build
 .phpdoc/cache
-cav-utilities/assets/
+cav-utilities/assets/*.min.*
 cav-utilities/languages/*backup*

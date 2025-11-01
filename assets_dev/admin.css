@@ -1,4 +1,4 @@
 @import 'tailwindcss' source(none);
 
-@source "../cavWP/components";
-@source not "../cavWP/components/links_page.latte";
+@source "../cav-utilities/components";
+@source not "../cav-utilities/components/links_page.latte";
