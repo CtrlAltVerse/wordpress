@@ -11,7 +11,7 @@ use WP_Error;
 class Validate
 {
    private $attribute;
-   private $character_checkers = ['special', 'lowercase', 'uppercase', 'number'];
+   private $character_checkers = ['special', 'lowercase', 'uppercase', 'number', 'space'];
    private $date               = ['datetime', 'date', 'time', 'month', 'week'];
    private $formats            = ['url', 'cnpj', 'cpf', 'cpf_or_cnpj', 'credit_card'];
    private $key;
@@ -707,6 +707,41 @@ class Validate
       return $this->_error(esc_attr__('%s is not a valid post ID', 'cav-utilities'));
    }
 
+   private function space($method)
+   {
+      if (empty($this->value) && empty($this->attribute['required'])) {
+         return true;
+      }
+
+      preg_match_all('/( )/', $this->value, $matches);
+
+      $count = 0;
+
+      if (!empty($matches[0])) {
+         $count = count($matches[0]);
+      }
+
+      if ('all' === $method && strlen($this->value) !== $count) {
+         return $this->_error(
+            esc_attr__('%s: All characters must be spaces.', 'cav-utilities'),
+         );
+      }
+
+      if ('has' === $method && 0 === $count) {
+         return $this->_error(
+            esc_attr__('%s: Must contain at least one space.', 'cav-utilities'),
+         );
+      }
+
+      if ('not' === $method && $count >= 1) {
+         return $this->_error(
+            esc_attr__('%s: Must not contain any spaces.', 'cav-utilities'),
+         );
+      }
+
+      return true;
+   }
+
    /**
     * Check if value contains special characters.
     *
@@ -722,7 +757,9 @@ class Validate
          return true;
       }
 
-      $chars = str_split('!"#$%&()*+,-/:;>=<?@\[]^_`´{|}~');
+      $allow = !empty($this->attribute['special_allow']) ? str_split(stripslashes($this->attribute['special_allow'])) : [];
+      $chars = array_diff(str_split('\'!"#$%&()*+,-/:;>=<?@\[]^_`´{|}~'), $allow);
+
       $value = str_split($this->value);
 
       $count = 0;
