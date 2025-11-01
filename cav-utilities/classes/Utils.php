@@ -57,11 +57,7 @@ final class Utils
 
    public static function calc_text_color($background_color)
    {
-      $background_color = str_replace('#', '', $background_color);
-
-      $r = hexdec(substr($background_color, 0, 2));
-      $g = hexdec(substr($background_color, 2, 2));
-      $b = hexdec(substr($background_color, 4, 2));
+      list($r, $g, $b) = self::hex_to_rgb($background_color);
 
       $luminance = (0.299 * $r + 0.587 * $g + 0.114 * $b) / 255;
 
@@ -337,6 +333,17 @@ final class Utils
       return array_filter($archives);
    }
 
+   public static function hex_to_rgb($color)
+   {
+      $color = str_replace('#', '', $color);
+
+      $r = hexdec(substr($color, 0, 2));
+      $g = hexdec(substr($color, 2, 2));
+      $b = hexdec(substr($color, 4, 2));
+
+      return [$r, $g, $b];
+   }
+
    /**
     * Creates a directory.
     *
@@ -369,6 +376,26 @@ final class Utils
       }
 
       return false;
+   }
+
+   public static function mask($value, $mask)
+   {
+      $result = '';
+      $k      = 0;
+
+      for ($i = 0; $i < strlen($mask); $i++) {
+         if ('#' === $mask[$i]) {
+            if (isset($value[$k])) {
+               $result .= $value[$k++];
+            }
+         } else {
+            if (isset($mask[$i])) {
+               $result .= $mask[$i];
+            }
+         }
+      }
+
+      return $result;
    }
 
    public static function maybe_image($attachment_ID, $size, $attrs)
@@ -434,6 +461,17 @@ final class Utils
       }
 
       return $paginate_links;
+   }
+
+   public static function parse_titles($itens)
+   {
+      if (count($itens) <= 2) {
+         return implode(' ' . __('and', 'cav-utilities') . ' ', $itens);
+      }
+
+      $last = array_pop($itens);
+
+      return implode(', ', $itens) . ' ' . __('and', 'cav-utilities') . ' ' . $last;
    }
 
    /**
@@ -506,12 +544,14 @@ final class Utils
 
          if ($compare) {
             if (
-               $current_sizes['width'] <= $size['width'] && $current_sizes['height'] <= $size['height']) {
+               $current_sizes['width'] <= $size['width'] && $current_sizes['height'] <= $size['height']
+            ) {
                continue;
             }
 
             if (
-               isset($current_sizes['sizes'][$size_name]) && $current_sizes['sizes'][$size_name]['width'] === $size['width'] && $current_sizes['sizes'][$size_name]['height'] === $size['height']) {
+               isset($current_sizes['sizes'][$size_name]) && $current_sizes['sizes'][$size_name]['width'] === $size['width'] && $current_sizes['sizes'][$size_name]['height'] === $size['height']
+            ) {
                continue;
             }
          }
@@ -535,6 +575,30 @@ final class Utils
       wp_update_attachment_metadata($attachment_id, $current_sizes);
 
       return true;
+   }
+
+   public static function remove_emoji($string)
+   {
+      // Match Emoticons
+      $regex_emoticons = '/[\x{1F600}-\x{1F64F}]/u';
+      $clear_string    = preg_replace($regex_emoticons, '', $string);
+
+      // Match Miscellaneous Symbols and Pictographs
+      $regex_symbols = '/[\x{1F300}-\x{1F5FF}]/u';
+      $clear_string  = preg_replace($regex_symbols, '', $clear_string);
+
+      // Match Transport And Map Symbols
+      $regex_transport = '/[\x{1F680}-\x{1F6FF}]/u';
+      $clear_string    = preg_replace($regex_transport, '', $clear_string);
+
+      // Match Miscellaneous Symbols
+      $regex_misc   = '/[\x{2600}-\x{26FF}]/u';
+      $clear_string = preg_replace($regex_misc, '', $clear_string);
+
+      // Match Dingbats
+      $regex_dingbats = '/[\x{2700}-\x{27BF}]/u';
+
+      return preg_replace($regex_dingbats, '', $clear_string);
    }
 
    /**
@@ -567,6 +631,7 @@ final class Utils
       if (!$echo) {
          return $content;
       }
+
       echo $content;
    }
 
