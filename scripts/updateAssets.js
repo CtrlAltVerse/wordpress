@@ -1,7 +1,7 @@
 const https = require('https')
 const fs = require('fs').promises
 
-const registerFile = './cavWP/classes/Register_Assets.php'
+const registerFile = './cav-utilities/classes/Register_Assets.php'
 const assets = [
    {
       asset: 'fontawesome',
@@ -116,7 +116,7 @@ assets.forEach(async (asset) => {
    }
 
    await fs.writeFile(
-      `./cavWP/assets/${asset.asset}.min.css`,
+      `./cav-utilities/assets/${asset.asset}.min.css`,
       remoteContent,
       'utf-8'
    )

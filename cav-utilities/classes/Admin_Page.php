@@ -49,7 +49,7 @@ final class Admin_Page
 
    public function adds_settings_links($actions)
    {
-      $settings_url = admin_url('options-general.php?page=cavwp');
+      $settings_url = admin_url('page=cavwp');
 
       $actions[] = [
          '<a href="' . $settings_url . '">' . esc_html__('Settings', 'cav-utilities') . '</a>',
@@ -66,14 +66,14 @@ final class Admin_Page
    {
       global $pagenow;
 
-      if ('options-general.php' !== $pagenow || !in_array($_GET['page'] ?? '', ['cavwp', 'cavwp-seo_links'])) {
+      if (!str_starts_with($_GET['page'] ?? '', 'cavwp')) {
          return;
       }
 
       add_thickbox();
       $assets_dir = plugin_dir_url(CAV_WP_FILE) . 'assets/';
 
-      wp_enqueue_style('cavwp', $assets_dir . 'config_page.css');
+      wp_enqueue_style('cavwp', $assets_dir . 'config_page.min.css');
    }
 
    public function field_content($field): void
@@ -184,12 +184,13 @@ final class Admin_Page
    {
       $name = get_plugin_data(CAV_WP_FILE)['Name'];
 
-      add_options_page(
+      add_menu_page(
          $name,
          $name,
          'manage_options',
          'cavwp',
          [$this, 'page_content'],
+         'https://cdn.altvers.net/cav_icon.svg',
          99,
       );
    }
@@ -267,10 +268,17 @@ final class Admin_Page
          return;
       }
 
-      $success = wp_mail(get_option('admin_email'), '[' . get_bloginfo('name') . '] Test mail', 'This is a test mail.');
-      $test    = $success ? 'test_mail-yes' : 'test_mail-no';
+      if (
+         !empty(\get_option('cav-smtp')) && !empty(\get_option('cav-smtp-host')) && !empty(\get_option('cav-smtp-port')) && !empty(\get_option('cav-smtp-user')) && !empty(\get_option('cav-smtp-password')) && !empty(\get_option('cav-smtp-secure'))
+      ) {
+         $success = wp_mail(\get_option('admin_email'), '[' . \get_bloginfo('name') . '] Test mail', 'This is a test mail.');
+      } else {
+         $success = false;
+      }
 
-      if (wp_safe_redirect(admin_url('options-general.php?page=cavwp&cav_notice=' . $test))) {
+      $test = $success ? 'test_mail-yes' : 'test_mail-no';
+
+      if (\wp_safe_redirect(\admin_url('admin.php?page=cavwp&cav_notice=' . $test))) {
          exit;
       }
    }

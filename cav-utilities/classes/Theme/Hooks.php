@@ -1,11 +1,48 @@
 <?php
 
-namespace cavWP;
+namespace cavWP\Theme;
 
-final class After_Theme
+final class Hooks
 {
+   private $page_templates = [
+      '404',
+      'archive',
+      'attachment',
+      'author',
+      'category',
+      'date',
+      'embed',
+      'frontpage',
+      'home',
+      'index',
+      'page',
+      'paged',
+      'privacypolicy',
+      'search',
+      'single',
+      'singular',
+      'tag',
+      'taxonomy',
+   ];
+
    public function __construct()
    {
+      \add_action('init', [$this, 'changes_base_rewrite']);
+
+      if (\get_option('cav-theme-gtm_code')) {
+         \add_action('cav_head_scripts', [$this, 'add_gtm_script']);
+         \add_action('wp_body_open', [$this, 'add_gtm_html']);
+      }
+
+      if (\get_option('cav-theme-remove_title_prepend')) {
+         \add_filter('protected_title_format', [$this, 'remove_prepend']);
+         \add_filter('private_title_format', [$this, 'remove_prepend']);
+      }
+
+      if (\get_option('cav-theme-no_title')) {
+         \add_filter('the_title', [$this, 'add_no_title']);
+      }
+
       if (\get_option('cav-theme-add_supports')) {
          \add_action('after_setup_theme', [$this, 'add_supports']);
       }
@@ -14,13 +51,74 @@ final class After_Theme
          \add_action('after_setup_theme', [$this, 'add_title_tag']);
       }
 
-      if (\get_option('cav-dashboard-hide_bar')) {
-         \add_action('after_setup_theme', [$this, 'hide_admin_bar']);
-      }
-
       if (\get_option('cav-theme-remove_tags')) {
          \add_action('after_setup_theme', [$this, 'remove_hooks']);
       }
+
+      if (\get_option('cav-theme-remove_assets')) {
+         \add_action('wp_enqueue_scripts', [$this, 'dequeue_styles'], 100);
+      }
+
+      if (\get_option('cav-theme-rest_url_base')) {
+         \add_filter('rest_url_prefix', [$this, 'change_rest_api_base']);
+      }
+
+      if (\get_option('cav-theme-pages_template')) {
+         foreach ($this->page_templates as $template) {
+            \add_filter("{$template}_template_hierarchy", [$this, 'add_pages_folder']);
+         }
+      }
+   }
+
+   public function add_gtm_html()
+   {
+      $code = \get_option('cav-theme-gtm_code');
+
+      echo <<<HTML
+      <!-- Google Tag Manager (noscript) -->
+      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={$code}"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+      <!-- End Google Tag Manager (noscript) -->
+      HTML;
+   }
+
+   public function add_gtm_script()
+   {
+      $code = \get_option('cav-theme-gtm_code');
+
+      echo <<<HTML
+      <!-- Google Tag Manager -->
+      <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','{$code}');</script>
+      <!-- End Google Tag Manager -->
+      HTML;
+   }
+
+   public function add_no_title($post_title)
+   {
+      if ('' !== trim($post_title)) {
+         return $post_title;
+      }
+
+      return esc_html__('(no title)');
+   }
+
+   public function add_pages_folder(array $templates)
+   {
+      if (str_contains($templates[0], 'pages/')) {
+         return $templates;
+      }
+
+      foreach ($templates as $template) {
+         $index           = str_replace('.php', '/_index.php', $template);
+         $new_templates[] = "pages/{$index}";
+         $new_templates[] = "pages/{$template}";
+      }
+
+      return array_merge($new_templates, $templates);
    }
 
    public function add_supports(): void
@@ -47,9 +145,29 @@ final class After_Theme
       add_theme_support('title-tag');
    }
 
-   public function hide_admin_bar(): void
+   public function change_rest_api_base()
    {
-      show_admin_bar(false);
+      return 'api';
+   }
+
+   public function changes_base_rewrite()
+   {
+      global $wp_rewrite;
+
+      if (get_option('cav-theme-author_base')) {
+         $wp_rewrite->author_base = get_option('cav-theme-author_base');
+      }
+
+      if (get_option('cav-theme-search_base')) {
+         $wp_rewrite->search_base = get_option('cav-theme-search_base');
+      }
+   }
+
+   public function dequeue_styles(): void
+   {
+      wp_dequeue_style('wp-block-library');
+      wp_dequeue_style('classic-theme-styles');
+      wp_dequeue_style('global-styles');
    }
 
    public function remove_hooks(): void
@@ -147,6 +265,12 @@ final class After_Theme
       // Disable Link header for the REST API.
       remove_action('template_redirect', 'rest_output_link_header', 11, 0);
 
+      // Remove W3 Total Cache comment from footer
+      add_filter('w3tc_can_print_comment', '__return_false');
+
+      // Disable JSON-LD sitelinks searchbox using WordPress
+      add_filter('disable_wpseo_json_ld_search', '__return_true');
+
       /*
        * Disable alias redirects to /wp-admin and /wp-login.
        *
@@ -155,5 +279,10 @@ final class After_Theme
        * /login != /wp-login.php
        */
       remove_action('template_redirect', 'wp_redirect_admin_locations', 1000);
+   }
+
+   public function remove_prepend()
+   {
+      return '%s';
    }
 }

@@ -52,7 +52,10 @@ final class cavWP
       add_action('init', [$this, 'init_hook'], 9);
       add_action('wp', [$this, 'load_parse_content']);
 
-      new After_Theme();
+      new Dashboard\Plugin_Options();
+      new Theme\Plugin_Options();
+      new Dashboard\Hooks();
+      new Theme\Hooks();
    }
 
    public function block_ips(): void
@@ -72,6 +75,7 @@ final class cavWP
       new Reorder_Head_Hooks();
       new Misc();
       new Menu();
+      new Columns();
 
       if (get_option('cav-seo_links')) {
          new SEO_Links\Register();

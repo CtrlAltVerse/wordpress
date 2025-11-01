@@ -27,7 +27,8 @@ class Admin_Page
    {
       $name = esc_html__('CAV Activity Logs', 'cav-utilities');
 
-      $this->menu = add_options_page(
+      $this->menu = add_submenu_page(
+         'cavwp',
          $name,
          $name,
          'manage_options',

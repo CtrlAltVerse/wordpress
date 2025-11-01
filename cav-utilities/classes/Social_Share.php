@@ -54,7 +54,7 @@ final class Social_Share
          }
       }
 
-      if(!empty($this->active_networks)){
+      if (!empty($this->active_networks)) {
          add_action('wp_insert_post', [$this, 'on_post_save'], 10, 2);
       }
 
@@ -73,7 +73,7 @@ final class Social_Share
       }
 
       // TOO OLD
-      if(DAY_IN_SECONDS <= time() - strtotime($post->post_date_gmt)){
+      if (DAY_IN_SECONDS <= time() - strtotime($post->post_date_gmt)) {
          return;
       }
 
@@ -116,7 +116,7 @@ final class Social_Share
       $Facebook = new Facebook();
       $Facebook->save_token($code);
 
-      $url = admin_url('options-general.php?page=cavwp');
+      $url = admin_url('page=cavwp');
 
       if (wp_safe_redirect($url)) {
          exit;
@@ -135,7 +135,7 @@ final class Social_Share
       $Threads = new Threads();
       $Threads->save_token($code);
 
-      $url = admin_url('options-general.php?page=cavwp');
+      $url = admin_url('page=cavwp');
 
       if (wp_safe_redirect($url)) {
          exit;

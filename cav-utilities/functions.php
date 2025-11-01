@@ -469,20 +469,6 @@ if (!function_exists('is_environment')) {
    }
 }
 
-if (!function_exists('is_cli')) {
-   /**
-    * Determines whether is running from a WP CLI command.
-    *
-     * @return bool Whether is from WP CLI.
-    *
-    * @since 1.0.0 Introduced.
-    */
-   function is_cli()
-   {
-      return defined('WP_CLI') && \WP_CLI;
-   }
-}
-
 if (!function_exists('_cav_prints_meta_charset')) {
    /**
     * @ignore
