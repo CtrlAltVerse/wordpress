@@ -95,6 +95,10 @@ final class cavWP
          new Metatags();
       }
 
+      if (get_option('cav-metatags-manifest')) {
+         new ManifestJson();
+      }
+
       if (get_option('cav-sitemaps-google_news')) {
          new Sitemap_Google_News();
       }

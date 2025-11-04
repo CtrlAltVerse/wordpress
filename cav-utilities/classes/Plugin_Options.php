@@ -68,6 +68,10 @@ final class Plugin_Options
                   'description' => esc_html__('Used on Chrome in Android and Windows 8 Pin.', 'cav-utilities'),
                   'type'        => 'color',
                ],
+               'manifest' => [
+                  'label' => esc_html__('Creates manifest.json file for Web Application', 'cav-utilities'),
+                  'type'  => 'checkbox',
+               ],
                'fb_app_id' => [
                   'label' => esc_html__('Facebook App ID', 'cav-utilities'),
                   'type'  => 'number',

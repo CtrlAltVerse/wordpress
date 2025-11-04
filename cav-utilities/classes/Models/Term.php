@@ -58,6 +58,7 @@ class Term
          'type'             => 'taxonomy',
          'group'            => 'term_group',
          'term_description' => 'description',
+         'summary'          => 'description',
          'taxonomy_id'      => 'term_taxonomy_id',
          'link'             => 'permalink',
          default            => $key,
