@@ -115,7 +115,19 @@ class User
       $all_socials  = Utils::get_services('profile');
       $user_socials = [];
 
+      $to_hidden = get_user_option('networks-hidden', $this->ID);
+
+      if (empty($to_hidden) || !is_multisite()) {
+         $to_hidden = [];
+      }
+
+      $to_hidden = array_keys($to_hidden);
+
       foreach ($all_socials as $key => $social) {
+         if (in_array($key, $to_hidden)) {
+            continue;
+         }
+
          if (!empty($only) && !in_array($key, $only)) {
             continue;
          }
