@@ -227,6 +227,12 @@ class Utils
             'color'   => 'fc6d25',
             'profile' => 'https://gitlab.com/%user%',
          ],
+         'amazon-profile' => [
+            'name'    => 'Autor na Amazon',
+            'icon'    => 'fa-brands fa-amazon ri-amazon-fill',
+            'color'   => '#131921',
+            'profile' => 'https://www.amazon.com.br/stores/author/%user%',
+         ],
       ];
 
       if (is_array($type_or_keys)) {

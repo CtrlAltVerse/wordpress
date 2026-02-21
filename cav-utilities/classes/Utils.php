@@ -465,7 +465,15 @@ final class Utils
 
    public static function parse_titles($itens)
    {
-      if (count($itens) <= 2) {
+      if (!is_array($itens)) {
+         return $itens;
+      }
+
+      if (count($itens) === 1) {
+         return $itens[0];
+      }
+
+      if (count($itens) === 2) {
          return implode(' ' . __('and', 'cav-utilities') . ' ', $itens);
       }
 
