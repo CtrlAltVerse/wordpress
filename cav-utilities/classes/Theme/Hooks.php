@@ -56,7 +56,9 @@ final class Hooks
       }
 
       if (\get_option('cav-theme-remove_assets')) {
-         \add_action('wp_enqueue_scripts', [$this, 'dequeue_styles'], 100);
+         remove_action('wp_enqueue_scripts', 'wp_enqueue_global_styles');
+         remove_action('wp_footer', 'wp_enqueue_global_styles', 1);
+         \add_action('wp_enqueue_scripts', [$this, 'dequeue_styles'], 99);
       }
 
       if (\get_option('cav-theme-rest_url_base')) {
@@ -167,7 +169,6 @@ final class Hooks
    {
       wp_dequeue_style('wp-block-library');
       wp_dequeue_style('classic-theme-styles');
-      wp_dequeue_style('global-styles');
    }
 
    public function remove_hooks(): void

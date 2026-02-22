@@ -54,6 +54,7 @@ final class cavWP
 
       new Dashboard\Plugin_Options();
       new Theme\Plugin_Options();
+      new General\Hooks();
       new Dashboard\Hooks();
       new Theme\Hooks();
    }
