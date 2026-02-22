@@ -49,7 +49,7 @@ class Health_Check
 
    public function health_check()
    {
-      // 0s - If reaches here, all those three is OK.
+      // 0s - If reaches here, all those three are OK.
       $checks['php'] = true;
       $checks['wp']  = true;
       $checks['api'] = true;
@@ -58,9 +58,6 @@ class Health_Check
       $checks['dotorg'] = $this->check_url('https://api.wordpress.org');
 
       if (is_environment(['staging', 'production'])) {
-         // 8s - wp-cron is accessible
-         $checks['cron'] = $this->check_url(site_url('wp-cron.php'));
-
          // 8s - home is accessible and has content
          $https_home     = $this->check_url(home_url('/', is_ssl() ? 'https' : 'http'), ['is_local' => true, 'is_empty' => 1024]);
          $checks['home'] = $https_home;
