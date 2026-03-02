@@ -29,6 +29,10 @@ final class Hooks
    {
       \add_action('init', [$this, 'changes_base_rewrite']);
 
+      if (\get_option('cav-theme-use_webp')) {
+         \add_filter('image_editor_output_format', [$this, 'set_image_formats']);
+      }
+
       if (\get_option('cav-theme-gtm_code')) {
          \add_action('cav_head_scripts', [$this, 'add_gtm_script']);
          \add_action('wp_body_open', [$this, 'add_gtm_html']);
@@ -285,5 +289,13 @@ final class Hooks
    public function remove_prepend()
    {
       return '%s';
+   }
+
+   public function set_image_formats($formats)
+   {
+      $formats['image/jpeg'] = 'image/webp';
+      $formats['image/png']  = 'image/webp';
+
+      return $formats;
    }
 }

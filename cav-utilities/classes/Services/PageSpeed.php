@@ -61,6 +61,7 @@ class PageSpeed
       return [
          'report'     => $categories,
          'datetime'   => $body['analysisUTCTimestamp'],
+         'strategy'   => $strategy,
          'screenshot' => $body['lighthouseResult']['fullPageScreenshot']['screenshot']['data'],
       ];
    }

@@ -65,6 +65,11 @@ class Plugin_Options
                   'placeholder' => 'search',
                ],
             ],
+            'use_webp' => [
+               'label'       => esc_html__('Use WebP images.', 'cav-utilities'),
+               'description' => esc_html__('The server must have support.', 'cav-utilities'),
+               'type'        => 'checkbox',
+            ],
             'gtm_code' => [
                'label' => esc_html__('Google Tag Manager code.', 'cav-utilities'),
                'type'  => 'text',

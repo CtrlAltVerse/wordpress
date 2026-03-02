@@ -7,7 +7,7 @@
    "license": "Apache-2.0",
    "scripts": {
       "build": "node ./scripts/updateAssets.js && npm run admin -- --minify && npm run links -- --minify",
-      "dev": "nodemon & npm run admin -- --watch & npm run links -- --watch",
+      "watch": "nodemon & npm run admin -- --watch & npm run links -- --watch",
       "admin": "npx @tailwindcss/cli -i ./assets_dev/admin.css -o ./cav-utilities/assets/config_page.min.css",
       "links": "npx @tailwindcss/cli -i ./assets_dev/links.css -o ./cav-utilities/assets/links_page.min.css",
       "js": "webpack"
