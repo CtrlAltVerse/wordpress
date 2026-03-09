@@ -11,6 +11,8 @@ class Columns
 
       add_action('manage_posts_custom_column', [$this, 'get_column'], 10, 2);
       add_action('manage_pages_custom_column', [$this, 'get_column'], 10, 2);
+
+      add_filter('manage_edit-post_sortable_columns', [$this, 'add_sort_column']);
    }
 
    public function add_columns($columns, $post_type = 'page')
@@ -26,6 +28,13 @@ class Columns
       return $columns;
    }
 
+   public function add_sort_column($columns)
+   {
+      $columns['order'] = 'menu_order';
+
+      return $columns;
+   }
+
    public function get_column($column, $post_ID)
    {
       switch ($column) {
@@ -35,6 +44,9 @@ class Columns
 
          case 'post-format':
             echo get_post_format($post_ID);
+            break;
+
+         default:
             break;
       }
    }

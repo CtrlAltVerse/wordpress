@@ -407,16 +407,6 @@ final class Utils
       return wp_get_attachment_image($attachment_ID, $size, false, $attrs);
    }
 
-   public static function number_suffix(int $number)
-   {
-      return match (substr((string) $number, -1)) {
-         '1'     => 'st',
-         '2'     => 'nd',
-         '3'     => 'rd',
-         default => 'th',
-      };
-   }
-
    /**
     * A revision of paginate_links() with a standardized `mid_size` value.
     *

@@ -39,18 +39,30 @@ class Plugin_Options
             'twitter_api_key' => [
                'label' => 'X API Key',
                'type'  => 'password',
+               'attrs' => [
+                  'autocomplete' => 'off',
+               ],
             ],
             'twitter_api_key_secret' => [
                'label' => 'X API Key Secret',
                'type'  => 'password',
+               'attrs' => [
+                  'autocomplete' => 'off',
+               ],
             ],
             'twitter_access_token' => [
                'label' => 'X Access Token',
                'type'  => 'password',
+               'attrs' => [
+                  'autocomplete' => 'off',
+               ],
             ],
             'twitter_access_token_secret' => [
                'label' => 'X Access Token Secret',
                'type'  => 'password',
+               'attrs' => [
+                  'autocomplete' => 'off',
+               ],
             ],
             'fb_on' => [
                'label' => esc_html__('Auto publish new posts on Facebook', 'cav-utilities'),
@@ -67,6 +79,9 @@ class Plugin_Options
             'fb_client_secret' => [
                'label' => 'Facebook App Client Secret',
                'type'  => 'password',
+               'attrs' => [
+                  'autocomplete' => 'off',
+               ],
             ],
             'fb_renew_token' => [
                'label'   => esc_html__('Get or Renew Page Access Token', 'cav-utilities'),
@@ -87,6 +102,9 @@ class Plugin_Options
             'threads_app_client_secret' => [
                'label' => 'Threads App Client Secret',
                'type'  => 'password',
+               'attrs' => [
+                  'autocomplete' => 'off',
+               ],
             ],
             'threads_renew_token' => [
                'label'   => esc_html__('Get Access Token', 'cav-utilities'),

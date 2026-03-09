@@ -2,6 +2,8 @@
 
 namespace cavWP;
 
+use DateTimeImmutable;
+
 /*
 day ---
 N	ISO 8601 numeric representation of the day of the week	1 (for Monday) through 7 (for Sunday)
@@ -40,7 +42,7 @@ class Dekatrian
 
    public function __construct($datetime = 'now', $timezone = null)
    {
-      $this->gregorian = new \DateTimeImmutable($datetime, $timezone);
+      $this->gregorian = new DateTimeImmutable($datetime, $timezone);
    }
 
    public function format($format = 'Qj F Y')
@@ -125,6 +127,8 @@ class Dekatrian
       $weekday_name     = $wp_locale->get_weekday($this->gregorian->format('w'));
       $week_of_the_year = ceil($day_of_the_year / 7);
 
+      $formatter = new NumberFormatter('en_US', NumberFormatter::ORDINAL);
+
       return [
          'D' => $wp_locale->get_weekday_abbrev($weekday_name),
          'd' => str_pad($day, 2, '0', STR_PAD_LEFT),
@@ -134,17 +138,17 @@ class Dekatrian
          'm' => str_pad($month, 2, '0', STR_PAD_LEFT),
          'M' => substr($this::MONTHS[$month], 0, 3),
          'n' => $month,
-         't' => 0 === $month ? 0 : 28,
+         'o' => $year,
          'Q' => 0 === $month ? $this::DAYS[$day] : '',
          'q' => 0 === $month ? substr($this::DAYS[$day], 0, 3) : '',
+         'S' => substr($formatter->format($day), -2, 2),
+         't' => 0 === $month ? 0 : 28,
          'W' => $week_of_the_year <= 0 ? 1 : $week_of_the_year,
          'X' => ($year < 0 ? '-' : '+') . $year_pad,
          'x' => ($year < 0 ? '-' : ($year > 9999 ? '+' : '')) . $year_pad,
          'Y' => ($year < 0 ? '-' : '') . $year_pad,
          'y' => substr($year_pad, -2),
          'z' => $day_of_the_year - 1,
-         'S' => Utils::number_suffix($day),
-         'o' => $year,
       ];
    }
 }

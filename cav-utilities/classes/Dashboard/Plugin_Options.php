@@ -54,6 +54,9 @@ class Plugin_Options
             'unsplash_key' => [
                'label' => __('Unsplash', 'cav-utilities'),
                'type'  => 'password',
+               'attrs' => [
+                  'autocomplete' => 'off',
+               ],
             ],
          ],
       ];
@@ -79,6 +82,9 @@ class Plugin_Options
             'password' => [
                'label' => 'Password',
                'type'  => 'password',
+               'attrs' => [
+                  'autocomplete' => 'off',
+               ],
             ],
             'secure' => [
                'label'   => 'Secure',

@@ -4,7 +4,7 @@ namespace cavWP;
 
 /*
  * Plugin Name: CAV Utilities
- * Plugin URI: https://plugins.altvers.net/wp/
+ * Plugin URI: https://ctrlaltverse.github.io/wordpress/
  * Description: All-in-one tool with resources for SEO, performance enhancement and more.
  * Version: 1.0.0
  * Author: CtrlAltVersœ

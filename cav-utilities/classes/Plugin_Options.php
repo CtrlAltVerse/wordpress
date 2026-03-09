@@ -144,6 +144,9 @@ final class Plugin_Options
                'contact' => [
                   'label' => esc_html__('E-mail for contact', 'cav-utilities'),
                   'type'  => 'email',
+                  'attrs' => [
+                     'autocomplete' => 'off',
+                  ],
                ],
             ],
          ],
@@ -218,6 +221,9 @@ final class Plugin_Options
                'pagespeed_apikey' => [
                   'label' => __('PageSpeed API Key', 'cav-utilities'),
                   'type'  => 'password',
+                  'attrs' => [
+                     'autocomplete' => 'off',
+                  ],
                ],
                'custom_urls' => [
                   'label'       => __('Custom URLs to check', 'cav-utilities'),
