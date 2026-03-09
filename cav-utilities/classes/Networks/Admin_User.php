@@ -2,6 +2,9 @@
 
 namespace cavWP\Networks;
 
+/**
+ * @ignore
+ */
 class Admin_User
 {
    private $profile_networks;

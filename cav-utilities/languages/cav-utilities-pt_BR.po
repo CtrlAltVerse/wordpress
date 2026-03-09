@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: CAV WP Plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-08-07 01:43+0000\n"
-"PO-Revision-Date: 2025-08-18 22:50+0000\n"
+"PO-Revision-Date: 2026-03-09 02:30+0000\n"
 "Last-Translator: Fagner JB.\n"
 "Language-Team: Português do Brasil\n"
 "Language: pt_BR\n"
@@ -15,133 +15,154 @@ msgstr ""
 "X-Loco-Version: 2.8.0; wp-6.8.2; php-8.2.27\n"
 "X-Domain: cavWP"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:514
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Metatags.php:274
+#, php-format
+msgid "%s - Search Results"
+msgstr ""
+
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:406
 #, php-format
 msgid "%s is not a valid comment ID"
 msgstr "%s não é um ID de comentário"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Utils.php:157
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Utils.php:153
 #, php-format
 msgid "%s is not a valid method."
 msgstr "%s não é um método válido."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:766
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:707
 #, php-format
 msgid "%s is not a valid post ID"
 msgstr "%s não é um ID de publicação ID válido"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:845
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:823
 #, php-format
 msgid "%s is not a valid term ID"
 msgstr "%s não é um ID de termo válido"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:945
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:923
 #, php-format
 msgid "%s is not a valid user ID"
 msgstr "%s não é um ID de usuário válido"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:481
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:373
 #, php-format
 msgid "%s its not a valid CNPJ."
 msgstr "%s não é um CNPJ válido."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:554
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:446
 #, php-format
 msgid "%s its not a valid CPF or CNPJ."
 msgstr "%s não é um CPF ou CNPJ válido."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:535
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:427
 #, php-format
 msgid "%s its not a valid CPF."
 msgstr "%s não é um CPF válido."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:603
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:495
 #, php-format
 msgid "%s its not a valid credit card."
 msgstr "%s não é um cartão de crédito válido."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:623
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:642
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:515
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:534
 #, php-format
 msgid "%s its not a valid date."
 msgstr "%s não é uma data válida."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:403
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:674
 #, php-format
 msgid "%s its not a valid phone number."
 msgstr "%s não é um número de telefone válido."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:241
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:202
 #, php-format
-msgid "%s its not in the valid format."
-msgstr "%s não está no formato válido."
+#| msgid "%s its not in the valid format."
+msgid "%s its not in the expect format."
+msgstr "%s não está no formato esperado."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:905
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:883
 #, php-format
 msgid "%s must be a valid URL."
 msgstr "%s deve ser um URL válido."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:710
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:602
 #, php-format
 msgid "%s: All characters must be number."
 msgstr "%s: Todos os caracteres devem ser números."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:809
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:726
+#, php-format
+msgid "%s: All characters must be spaces."
+msgstr ""
+
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:787
 #, php-format
 msgid "%s: All characters must be special."
 msgstr "%s: Todos os caracteres devem ser especiais."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:666
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:558
 #, php-format
 msgid "%s: All characters must lowercase."
 msgstr "%s: Todos os caracteres devem ser minúsculos."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:865
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:843
 #, php-format
 msgid "%s: All characters must uppercase."
 msgstr "%s: todos os caracteres devem ser maiúsculos."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:680
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:572
 #, php-format
 msgid "%s: Must contain at least one lowercase character."
 msgstr "%s: deve conter pelo menos um caráter minúsculo."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:724
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:616
 #, php-format
 msgid "%s: Must contain at least one number."
 msgstr "%s: deve conter pelo menos um número."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:797
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:732
+#, php-format
+msgid "%s: Must contain at least one space."
+msgstr ""
+
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:775
 #, php-format
 msgid "%s: Must contain at least one special character."
 msgstr "%s: deve conter pelo menos um caractere especial."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:879
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:857
 #, php-format
 msgid "%s: Must contain at least one uppercase character."
 msgstr "%s: deve conter pelo menos um caractere maiúsculo."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:686
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:578
 #, php-format
 msgid "%s: Must not contain any lowercase characters."
 msgstr "%s: não deve conter nenhum caracteres minúsculos."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:730
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:622
 #, php-format
 msgid "%s: Must not contain any numbers."
 msgstr "%s: não deve conter nenhum número."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:803
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:738
+#, php-format
+msgid "%s: Must not contain any spaces."
+msgstr ""
+
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:781
 #, php-format
 msgid "%s: Must not contain any special characters."
 msgstr "%s: não deve conter caracteres especiais."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:885
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:863
 #, php-format
 msgid "%s: Must not contain any uppercase characters."
 msgstr "%s: não deve conter nenhum caractere maiúsculo."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:361
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:231
 msgid "Add one full URL from this domain per line."
 msgstr "Adicione um URL completo deste domínio por linha."
 
@@ -149,7 +170,7 @@ msgstr "Adicione um URL completo deste domínio por linha."
 msgid "Adds metatags for SEO and social share."
 msgstr "Adiciona metatags para SEO e compartilhamento."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:178
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Theme/Plugin_Options.php:21
 msgid "Adds Title Tag support"
 msgstr "Adiciona tag de título"
 
@@ -158,21 +179,26 @@ msgid ""
 "All-in-one tool with resources for SEO, performance enhancement and more."
 msgstr "Ferramenta com recursos para SEO, melhoria de desempenho e muito mais."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Networks/Plugin_Options.php:117
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Utils.php:477
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Utils.php:482
+msgid "and"
+msgstr "e"
+
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Networks/Plugin_Options.php:129
 msgid "Apple Client ID"
 msgstr ""
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:154
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:160
 msgid "Asynchronously loads external CSS files on mobile devices."
 msgstr ""
 "Carrega arquivos CSS externos em dispositivos móveis de forma não "
 "sincronizada."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Networks/Plugin_Options.php:56
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Networks/Plugin_Options.php:68
 msgid "Auto publish new posts on Facebook"
 msgstr "Publicar automaticamente novos posts no Facebook"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Networks/Plugin_Options.php:80
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Networks/Plugin_Options.php:92
 msgid "Auto publish new posts on Threads"
 msgstr "Publicar automaticamente novos posts no Threads"
 
@@ -180,11 +206,7 @@ msgstr "Publicar automaticamente novos posts no Threads"
 msgid "Auto publish new posts on X"
 msgstr "Publicar automaticamente novos posts no X"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/functions.php:83
-msgid "AutoLoader was not found."
-msgstr "AutoLoader não foi encontrado."
-
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:158
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:164
 msgid "Cache GET requests"
 msgstr "Faz cache de requisições GET"
 
@@ -192,17 +214,29 @@ msgstr "Faz cache de requisições GET"
 msgid "CAV Activity Logs"
 msgstr "Registro de atividades"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/SEO_Links/Admin_Page.php:26
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/SEO_Links/Admin_Page.php:28
 msgid "CAV SEO Analysis"
 msgstr "Análise SEO"
 
 #. Name of the plugin
 msgid "CAV Utilities"
-msgstr ""
+msgstr "CAV Utilities"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:212
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Dashboard/Plugin_Options.php:29
 msgid "Change dashboards colors by environment"
 msgstr "Muda cor da administração por tipo de ambiente"
+
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Theme/Plugin_Options.php:51
+msgid "Changes REST API base URL to /api."
+msgstr ""
+
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Theme/Plugin_Options.php:55
+msgid "Changes the Author base URL."
+msgstr ""
+
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Theme/Plugin_Options.php:62
+msgid "Changes the Search base URL."
+msgstr ""
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Activity_Log/Utils.php:82
 msgid "Comment approved"
@@ -220,38 +254,42 @@ msgstr "Conteúdo"
 msgid "Contribute"
 msgstr "Contribuição"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Misc.php:206
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Dashboard/Hooks.php:77
 msgid "Created by"
 msgstr "Criado por"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:88
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:92
 #, php-format
 msgid "Creates %s."
 msgstr "Cria %s."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:82
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:86
 msgid ""
 "Creates adicional sitemaps and configure content for robots.txt and ads.txt."
 msgstr ""
 "Cria sitemaps adicionais e configura conteúdo para robots.txt e ads.txt."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:124
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:72
+msgid "Creates manifest.json file for Web Application"
+msgstr ""
+
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:127
 msgid "Creates opensearch.osdx file"
 msgstr "Cria opensearch.osdx"
 
 #. Author of the plugin
 msgid "CtrlAltVersœ"
-msgstr ""
+msgstr "CtrlAltVersœ"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:96
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:100
 msgid "Custom content for ads.txt"
 msgstr "Conteúdo personalizado para ads.txt"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:92
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:96
 msgid "Custom content for robots.txt"
 msgstr "Conteúdo personalizado para robots.txt"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:359
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:229
 msgid "Custom URLs to check"
 msgstr "URLs personalizados para verificar"
 
@@ -259,11 +297,15 @@ msgstr "URLs personalizados para verificar"
 msgid "Dashboard"
 msgstr "Painel"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:198
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Dashboard/Plugin_Options.php:15
 msgid "Dashboard Options"
 msgstr "Opções da Administração"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/functions.php:209
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Dashboard/Plugin_Options.php:45
+msgid "Deactivate the threshold for size image uploaded."
+msgstr ""
+
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/functions.php:218
 msgid "Directory for Latte Cache could not be created."
 msgstr "O diretório para o Latte Cache não pôde ser criado."
 
@@ -271,15 +313,15 @@ msgstr "O diretório para o Latte Cache não pôde ser criado."
 msgid "Divulgation"
 msgstr "Divulgação"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:452
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:344
 msgid "E-mail already in use."
 msgstr "E-mail já está em uso."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:142
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:145
 msgid "E-mail for contact"
 msgstr "E-mail para contato"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/SEO_Links/Admin_Page.php:19
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/SEO_Links/Admin_Page.php:21
 msgid "Edit"
 msgstr "Editar"
 
@@ -287,66 +329,74 @@ msgstr "Editar"
 msgid "Event"
 msgstr "Evento"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Activity_Log/Logger.php:259
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Activity_Log/Logger.php:262
 msgid "Event type is too long."
 msgstr "Tipo de evento é longo demais."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Activity_Log/Logger.php:255
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Activity_Log/Logger.php:258
 msgid "Event type unknown."
 msgstr "Tipo de evento desconhecido."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:72
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Networks/Plugin_Options.php:114
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:76
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Networks/Plugin_Options.php:126
 msgid "Facebook App ID"
 msgstr ""
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:162
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:168
 msgid "Force refresh of CSS files on update"
 msgstr "Força carregamento de arquivos CSS quando atualizados"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:166
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:172
 msgid "Force refresh of JS files on update"
 msgstr "Força carregamento de arquivos JS quando atualizados"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Misc.php:192
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Dashboard/Hooks.php:63
 msgid "From"
 msgstr "De"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Networks/Admin_User.php:52
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Networks/Admin_User.php:109
 msgid "Full URL"
 msgstr "URL completo"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Networks/Plugin_Options.php:92
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Networks/Plugin_Options.php:104
 msgid "Get Access Token"
 msgstr "Obtenha token de acesso"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Networks/Plugin_Options.php:72
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Networks/Plugin_Options.php:84
 msgid "Get or Renew Page Access Token"
 msgstr "Obtenha ou renove o token de acesso à página"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Networks/Plugin_Options.php:111
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Networks/Plugin_Options.php:123
 msgid "Google Client ID"
+msgstr ""
+
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Theme/Plugin_Options.php:74
+msgid "Google Tag Manager code."
+msgstr ""
+
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Networks/Admin_User.php:31
+msgid "Hide social network from profile"
 msgstr ""
 
 #. Author URI of the plugin
 msgid "https://ctrl.altvers.net/"
-msgstr ""
+msgstr "https://ctrl.altvers.net/"
 
 #. URI of the plugin
 msgid "https://plugins.altvers.net/wp/"
 msgstr ""
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Activity_Log/Table.php:125
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/SEO_Links/Admin_Page.php:15
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/SEO_Links/Admin_Page.php:17
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Utils.php:161
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Utils.php:157
 #, php-format
 msgid "Key length must be %s or less."
 msgstr "Ccomprimento da chave deve ser %s ou menos."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:136
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:139
 msgid "Keywords separated by space"
 msgstr "Palavras-chave separadas pelo espaço"
 
@@ -354,19 +404,19 @@ msgstr "Palavras-chave separadas pelo espaço"
 msgid "Login failed"
 msgstr "Login falhou"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:129
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:132
 msgid "Long name"
 msgstr "Nome longo"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:369
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Dashboard/Plugin_Options.php:51
 msgid "Media options"
 msgstr "Opções de mídia"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:113
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:116
 msgid "Minify CSS inline"
 msgstr "Reduzir CSS em linha"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:109
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:112
 msgid "Minify JS inline"
 msgstr "Reduzir JS em linha"
 
@@ -374,25 +424,25 @@ msgstr "Reduzir JS em linha"
 msgid "Networks"
 msgstr "Redes"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/functions.php:165
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/functions.php:174
 msgid "Not in pages."
 msgstr "Fora de pages."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:283
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:338
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:234
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:279
 #, php-format
 msgid "O formato esperado é %s."
 msgstr "O formato esperado é %s."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/SEO_Links/Admin_Page.php:18
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/SEO_Links/Admin_Page.php:20
 msgid "Object"
 msgstr "Objeto"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Networks/Admin_User.php:54
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Networks/Admin_User.php:111
 msgid "Only numbers"
 msgstr "Somente números"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:355
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:222
 msgid "PageSpeed API Key"
 msgstr ""
 
@@ -404,6 +454,10 @@ msgstr "Analisar"
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:18
 msgid "Performance"
 msgstr "Desempenho"
+
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Theme/Plugin_Options.php:47
+msgid "Populate empty post titles"
+msgstr ""
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Activity_Log/Utils.php:11
 msgid "Post deleted"
@@ -417,85 +471,85 @@ msgstr "Tipos de publicações para publicar"
 msgid "Post updated"
 msgstr "Post atualizado"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:344
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:285
 #, php-format
 msgid "Precisa ser anterior a data %s."
 msgstr ""
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:199
-#, php-format
-msgid "Precisa ser um arquivo com formato %s."
-msgstr ""
-
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:325
-#, php-format
-msgid "Precisa ser um arquivo maior ou igual a %s MB."
-msgstr ""
-
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:270
-#, php-format
-msgid "Precisa ser um arquivo menor ou igual a %s MB."
-msgstr ""
-
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:186
-msgid "Precisa ser um arquivo."
-msgstr ""
-
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:289
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:240
 #, php-format
 msgid "Precisa ser uma data posterior a %s."
 msgstr ""
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:350
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:217
 msgid "Regularly test templates with PageSpeed."
 msgstr "Testar regularmente templates com Pagespeed."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:117
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:120
 msgid "Remove comments"
 msgstr "Remover comentários"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:192
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Theme/Plugin_Options.php:43
+msgid "Remove prepend of titles"
+msgstr ""
+
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Theme/Plugin_Options.php:39
+msgid "Remove WP default assets"
+msgstr ""
+
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Theme/Plugin_Options.php:35
 msgid "Remove WP default tags"
 msgstr "Remover tags WP padrão"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:224
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Dashboard/Plugin_Options.php:41
 msgid "Restrict REST API access to logged-in users only."
 msgstr "Restringir o acesso à API apenas a usuários logados."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Misc.php:199
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Dashboard/Hooks.php:70
 msgid "Role"
 msgstr "Cargo"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:188
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Theme/Plugin_Options.php:31
 msgid "Search /pages theme folder for hierarchies templates."
 msgstr "Busca na pasta do tema /pages por templates."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Metatags.php:163
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Metatags.php:48
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Metatags.php:172
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Metatags.php:363
 #, php-format
 msgid "See all publications of %s"
 msgstr "Ver todas as publicações de %s"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:261
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Metatags.php:278
+#, php-format
+msgid "See all publications with %s"
+msgstr ""
+
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Networks/Admin_User.php:32
+msgid "Select social network to hidden from this profile on this site."
+msgstr ""
+
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Dashboard/Plugin_Options.php:98
 msgid "Send a test mail"
 msgstr "Envie um e-mail de teste"
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:14
 msgid "SEO"
-msgstr ""
+msgstr "SEO"
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Admin_Page.php:55
 msgid "Settings"
 msgstr "Configurações"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:208
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Dashboard/Plugin_Options.php:25
 msgid "Show ACF keys on UI"
 msgstr "Mostrar chaves ACF na UI"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:204
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Dashboard/Plugin_Options.php:21
 msgid "Show all images sizes on post editor (Gutenberg)"
 msgstr "Mostrar todos os tamanhos de imagens no editor (Gutenberg)"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Networks/Plugin_Options.php:107
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Networks/Plugin_Options.php:119
 msgid "Sign in with e-mail"
 msgstr "Inscreva-se com e-mail"
 
@@ -503,11 +557,11 @@ msgstr "Inscreva-se com e-mail"
 msgid "Site color"
 msgstr "Cor do site"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:135
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:138
 msgid "Tags"
 msgstr ""
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/SEO_Links/Admin_Page.php:17
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/SEO_Links/Admin_Page.php:19
 msgid "Template"
 msgstr "Template"
 
@@ -518,6 +572,10 @@ msgstr "Termo removido"
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Activity_Log/Utils.php:108
 msgid "Term searched"
 msgstr "Termo procurado"
+
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Theme/Plugin_Options.php:70
+msgid "The server must have support."
+msgstr ""
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Admin_Page.php:33
 msgid "The test mail was not sent. An error occurred."
@@ -531,7 +589,7 @@ msgstr "O e-mail de teste foi enviado sem erros."
 msgid "Theme"
 msgstr "Tema"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:172
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Theme/Plugin_Options.php:15
 msgid "Theme Options"
 msgstr "Opções do tema"
 
@@ -539,12 +597,16 @@ msgstr "Opções do tema"
 msgid "Too many failed login attempts."
 msgstr "Muitas tentativas falhas de login."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:373
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Dashboard/Plugin_Options.php:55
 msgid "Unsplash"
 msgstr ""
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/SEO_Links/Admin_Page.php:16
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/SEO_Links/Admin_Page.php:18
 msgid "URL"
+msgstr "URL"
+
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Theme/Plugin_Options.php:69
+msgid "Use WebP images."
 msgstr ""
 
 #: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:68
@@ -571,19 +633,19 @@ msgstr "Usuário registrado"
 msgid "User updated"
 msgstr "Usuário atualizado"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Networks/Admin_User.php:50
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Networks/Admin_User.php:107
 msgid "Username"
 msgstr "Nome de usuário"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:446
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Validate.php:338
 msgid "Username already in use."
 msgstr "Nome de usuário já em uso."
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:399
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:259
 #, php-format
 msgid "X's Card Format for %s"
 msgstr "Formato de cartão X para %s"
 
-#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:76
+#: F:/Projetos/CtrlAltVerso/plugins/wordpress/cav-utilities/classes/Plugin_Options.php:80
 msgid "X's Site Account"
 msgstr "Perfil do site no X"

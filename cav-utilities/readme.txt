@@ -1,5 +1,5 @@
 === CAV Utilities ===
-Contributors: fagnerjb, ctrlaltverse
+Contributors: ctrlaltverse, fagnerjb
 Tags: development, seo, performance
 Stable tag: 1.0.0
 Tested up to: 6.8

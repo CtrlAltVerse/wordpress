@@ -1,6 +1,6 @@
 <?php
 
-namespace cavWP;
+namespace cavWP\Dashboard;
 
 class Columns
 {

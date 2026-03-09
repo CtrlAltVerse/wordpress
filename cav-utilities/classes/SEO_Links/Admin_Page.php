@@ -2,6 +2,9 @@
 
 namespace cavWP\SEO_Links;
 
+/**
+ * @ignore
+ */
 class Admin_Page
 {
    public function __construct()

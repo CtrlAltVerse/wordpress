@@ -2,6 +2,10 @@
 
 namespace cavWP\Activity_Log;
 
+/**
+ * @ignore
+ */
+
 class Admin_Page
 {
    private $menu;

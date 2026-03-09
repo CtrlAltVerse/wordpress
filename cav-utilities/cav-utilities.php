@@ -76,7 +76,7 @@ final class cavWP
       new Reorder_Head_Hooks();
       new Misc();
       new Menu();
-      new Columns();
+      new Dashboard\Columns();
 
       if (get_option('cav-seo_links')) {
          new SEO_Links\Register();
