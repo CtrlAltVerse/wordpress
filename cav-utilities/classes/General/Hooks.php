@@ -11,6 +11,8 @@ class Hooks
 
    public function set_is_mobile()
    {
-      return str_contains($_SERVER['HTTP_USER_AGENT'], 'Mobile') || str_contains($_SERVER['HTTP_USER_AGENT'], 'Android') || str_contains($_SERVER['HTTP_USER_AGENT'], 'Silk/') || str_contains($_SERVER['HTTP_USER_AGENT'], 'Kindle') || str_contains($_SERVER['HTTP_USER_AGENT'], 'BlackBerry') || str_contains($_SERVER['HTTP_USER_AGENT'], 'Opera Mini') || str_contains($_SERVER['HTTP_USER_AGENT'], 'Opera Mobi');
+      $user_agent = $_SERVER['HTTP_USER_AGENT'] ?? '';
+
+      return str_contains($user_agent, 'Mobile') || str_contains($user_agent, 'Android') || str_contains($user_agent, 'Silk/') || str_contains($user_agent, 'Kindle') || str_contains($user_agent, 'BlackBerry') || str_contains($user_agent, 'Opera Mini') || str_contains($user_agent, 'Opera Mobi');
    }
 }
