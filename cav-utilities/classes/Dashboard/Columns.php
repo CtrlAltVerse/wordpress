@@ -2,6 +2,7 @@
 
 namespace cavWP\Dashboard;
 
+/** @ignore */
 class Columns
 {
    public function __construct()

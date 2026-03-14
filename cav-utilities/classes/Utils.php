@@ -84,7 +84,7 @@ final class Utils
     */
    public static function clean_domain($url)
    {
-      $domain = preg_replace('|https?://|', '', $url);
+      $domain = preg_replace('|https?://(www.)?|', '', $url);
 
       return untrailingslashit($domain);
    }

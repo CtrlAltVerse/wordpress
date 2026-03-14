@@ -48,7 +48,6 @@ final class cavWP
 {
    public function __construct()
    {
-      add_action('init', [$this, 'block_ips'], 8);
       add_action('init', [$this, 'init_hook'], 9);
       add_action('wp', [$this, 'load_parse_content']);
 
@@ -57,13 +56,7 @@ final class cavWP
       new General\Hooks();
       new Dashboard\Hooks();
       new Theme\Hooks();
-   }
-
-   public function block_ips(): void
-   {
-      if (str_starts_with(CURRENT_IP, '47.82.60')) {
-         wp_die('Blocked.');
-      }
+      new Caches\_Hooks();
    }
 
    public function init_hook(): void

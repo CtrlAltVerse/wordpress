@@ -2,6 +2,8 @@
 
 namespace cavWP;
 
+use cavWP\Caches\Disk;
+
 /**
  * @ignore
  */
@@ -30,7 +32,7 @@ final class Cache_Requests
       }
 
       if ('disk' === ($args['cache_type'] ?? false)) {
-         $cache       = new DiskCache($cache_key);
+         $cache       = new Disk($cache_key);
          $cached_data = $cache->get();
       } else {
          $cached_data = get_transient($cache_key);
@@ -62,7 +64,7 @@ final class Cache_Requests
       $cache_duration = $args['cache_duration'] ?? '6 hours';
 
       if ('disk' === ($args['cache_type'] ?? false)) {
-         $cache = new DiskCache($cache_key);
+         $cache = new Disk($cache_key);
          $cache->set($response, $cache_duration);
       } else {
          $cache_expiration = strtotime($cache_duration) - time();
