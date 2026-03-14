@@ -29,8 +29,8 @@ final class Utils
          return $raw;
       }
 
-      $mask = explode('', $mask);
-      $raw  = explode('', $raw);
+      $mask = str_split($mask);
+      $raw  = str_split($raw);
       $i    = 0;
 
       return implode('', array_map(fn($m) => ('#' === $m) ? $raw[$i++] : $m, $mask));
