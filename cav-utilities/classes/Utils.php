@@ -25,6 +25,10 @@ final class Utils
     */
    public static function apply_mask(int|string $raw, string $mask)
    {
+      if (empty($raw) || empty($mask)) {
+         return $raw;
+      }
+
       $mask = explode('', $mask);
       $raw  = explode('', $raw);
       $i    = 0;
