@@ -30,10 +30,21 @@ final class Utils
       }
 
       $mask = str_split($mask);
-      $raw  = str_split($raw);
+      $raw  = str_split((string) $raw);
       $i    = 0;
 
-      return implode('', array_map(fn($m) => ('#' === $m) ? $raw[$i++] : $m, $mask));
+      $return = '';
+
+      foreach ($mask as $m) {
+         if ('#' === $m) {
+            $return .= $raw[$i];
+            $i++;
+         } else {
+            $return .= $m;
+         }
+      }
+
+      return $return;
    }
 
    /**
