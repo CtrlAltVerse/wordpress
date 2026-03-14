@@ -14,6 +14,25 @@ use DateTimeZone;
 final class Utils
 {
    /**
+    * Applies a mask into a string.
+    *
+     * @param int|string $raw  Original string.
+     * @param string     $mask Mask with # to be replaced.
+    *
+     * @return string $raw with $mask applied.
+    *
+    * @since 1.0.0 Introduced.
+    */
+   public static function apply_mask(int|string $raw, string $mask)
+   {
+      $mask = explode('', $mask);
+      $raw  = explode('', $raw);
+      $i    = 0;
+
+      return implode('', array_map(fn($m) => ('#' === $m) ? $raw[$i++] : $m, $mask));
+   }
+
+   /**
     * Calculates a standardized `mid_size` value for use with `paginate_links()`.
     *
     * Ensures that the `mid_size` is dynamically adjusted based on the desired quantity,
