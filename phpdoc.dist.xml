@@ -19,13 +19,13 @@
          </ignore>
          <default-package-name>Plugin</default-package-name>
          <include-source>false</include-source>
-         <guide>
-            <source dsn=".">
-               <path>docs</path>
-            </source>
-            <output>/guide</output>
-         </guide>
       </api>
+      <guide>
+         <source dsn=".">
+            <path>docs</path>
+         </source>
+         <output>/features</output>
+      </guide>
    </version>
    <template name="default" />
    <setting name="template.color" value="indigo" />
