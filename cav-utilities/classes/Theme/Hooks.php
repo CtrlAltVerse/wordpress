@@ -28,6 +28,7 @@ final class Hooks
    public function __construct()
    {
       \add_action('init', [$this, 'changes_base_rewrite']);
+      \add_filter('body_class', [$this, 'add_body_class'], 10, 2);
 
       if (\get_option('cav-theme-use_webp')) {
          \add_filter('image_editor_output_format', [$this, 'set_image_formats']);
@@ -70,10 +71,25 @@ final class Hooks
       }
 
       if (\get_option('cav-theme-pages_template')) {
+         \add_action('init', [$this, 'include_page_register']);
+
          foreach ($this->page_templates as $template) {
             \add_filter("{$template}_template_hierarchy", [$this, 'add_pages_folder']);
          }
       }
+   }
+
+   public function add_body_class($classes)
+   {
+      if (!is_singular()) {
+         return $classes;
+      }
+
+      $current_post = get_post();
+
+      $classes[] = $current_post->post_type . '-' . $current_post->post_name;
+
+      return $classes;
    }
 
    public function add_gtm_html()
@@ -173,6 +189,39 @@ final class Hooks
    {
       wp_dequeue_style('wp-block-library');
       wp_dequeue_style('classic-theme-styles');
+   }
+   public function include_page_register()
+   {
+      $to_includes = ['RestApi', 'Ajax', 'Register', 'Cron'];
+      $theme       = get_template_directory() . DIRECTORY_SEPARATOR . 'pages';
+
+      $files = scandir($theme);
+
+      foreach ($files as $file) {
+         $file_path = $theme . DIRECTORY_SEPARATOR . $file;
+
+         if (is_dir($file_path) && !in_array($file, ['.', '..'])) {
+            $dir_files = scandir($file_path);
+
+            foreach ($dir_files as $dir_file) {
+               $dir_file_path = $file_path . DIRECTORY_SEPARATOR . $dir_file;
+
+               if (is_dir($dir_file_path)) {
+                  continue;
+               }
+
+               if (in_array(str_replace('.php', '', $dir_file), $to_includes)) {
+                  include_once $dir_file_path;
+               }
+            }
+
+            continue;
+         }
+
+         if (in_array(str_replace('.php', '', $file), $to_includes)) {
+            include_once $file_path;
+         }
+      }
    }
 
    public function remove_hooks(): void

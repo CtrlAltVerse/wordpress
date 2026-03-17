@@ -25,17 +25,25 @@ final class AutoLoader
    /**
     * Adds a base directory for a namespace prefix.
     *
-     * @param string $namespace The namespace.
-     * @param string $base_path Directory to search for classes in this namespace.
+     * @param string      $namespace The namespace.
+     * @param null|string $base_path Directory to search for classes in this namespace. Default: /pages and /classes in the current theme directory.
     */
-   public function add_namespace(string $namespace, string $base_path): void
+   public function add_namespace(string $namespace, ?string $base_path = null): void
    {
       $namespace = str_replace(['/', '\\'], '', $namespace);
       $namespace .= DIRECTORY_SEPARATOR;
-      $base_path = str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $base_path);
-      $base_path .= DIRECTORY_SEPARATOR;
 
-      $this->namespaces[$namespace][] = $base_path;
+      if (is_null($base_path)) {
+         $paths = ['pages', 'classes'];
+
+         foreach ($paths as $path) {
+            $base_path = get_template_directory() . DIRECTORY_SEPARATOR . $path;
+
+            $this->namespaces[$namespace][] = $this->parse_path($base_path);
+         }
+      } else {
+         $this->namespaces[$namespace][] = $this->parse_path($base_path);
+      }
    }
 
    /**
@@ -45,6 +53,13 @@ final class AutoLoader
     */
    public function load_class(string $class)
    {
+      if (str_contains($class, '\pages\\')) {
+         $class_e    = explode('\\', $class);
+         $class_e[2] = strtolower(preg_replace('/([A-Z])/', '-$1', $class_e[2]));
+         unset($class_e[1]);
+         $class = implode('\\', $class_e);
+      }
+
       $prefix = $class;
 
       while (false !== $pos = strrpos($prefix, '\\')) {
@@ -67,6 +82,7 @@ final class AutoLoader
     *
      * @param string $prefix
      * @param string $relative_class
+     * @param string $class
     */
    private function load_mapped_file(string $prefix, string $relative_class)
    {
@@ -78,7 +94,7 @@ final class AutoLoader
 
       foreach ($this->namespaces[$prefix] as $base_dir) {
          $file = $base_dir;
-         $file .= str_replace(['\\'], DIRECTORY_SEPARATOR, $relative_class);
+         $file .= str_replace('\\', DIRECTORY_SEPARATOR, $relative_class);
          $file .= '.php';
 
          if ($this->require_file($file)) {
@@ -87,6 +103,14 @@ final class AutoLoader
       }
 
       return false;
+   }
+
+   private function parse_path($base_path)
+   {
+      $base_path = str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $base_path);
+      $base_path .= DIRECTORY_SEPARATOR;
+
+      return $base_path;
    }
 
    /**
