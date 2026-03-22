@@ -192,7 +192,7 @@ final class Hooks
    }
    public function include_page_register()
    {
-      $to_includes = ['RestApi', 'Ajax', 'Register', 'Cron'];
+      $to_includes = ['RestApi', 'Ajax', 'Register', 'Cron','Columns'];
       $theme       = get_template_directory() . DIRECTORY_SEPARATOR . 'pages';
 
       $files = scandir($theme);
